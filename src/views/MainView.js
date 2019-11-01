@@ -13,10 +13,10 @@ const MainView = () => (
 
       <form>
 
-          <a href={""}><input type={"button"}  value={"로그인"}/></a><br/>
+          <a href={"/LoginView"}><input type={"button"}  value={"로그인"}/></a><br/>
           <a href={""}>아이디 찾기</a><br/>
           <a href={""}>비밀번호 찾기</a><br/>
-          <a href={""}>회원가입</a><br/>
+          <a href={"/MemberRegisterView"}>회원가입</a><br/>
 
           <img src={""} alt={"메인 배너"}/>  # 이미지가 실시간으로 변경
           # div로 묶기
