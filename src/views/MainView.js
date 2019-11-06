@@ -15,8 +15,8 @@ const MainView = () => (
 
           <div>
               <a href={"/LoginView"}><input type={"button"}  value={"로그인"}/></a><br/>
-              <a href={""}>아이디 찾기</a><br/>
-              <a href={""}>비밀번호 찾기</a><br/>
+                <a href={"/FindMyIdView"}>아이디 찾기</a><br/>
+                <a href={"/FindMyPasswdView"}>비밀번호 찾기</a><br/>
               <a href={"/MemberRegisterView"}>회원가입</a><br/>
           </div>
 

@@ -4,6 +4,8 @@ import LoginView from './views/LoginView';
 import TicketingView1 from './views/TicketingView1';
 import TicketingView2 from './views/TicketingView2';
 import TicketingView3 from './views/TicketingView3';
+import FindMyIdView from './views/FindMyIdView';
+import FindMyPasswdView from './views/FindMyPasswdView';
 
 const routes = [
   {
@@ -23,6 +25,18 @@ const routes = [
         path: '/LoginView',
         exact: true,
         component: LoginView,
+    },
+    {
+        id: 'findMyId',
+        path: '/FindMyIdView',
+        exact: true,
+        component: FindMyIdView,
+    },
+    {
+        id: 'findMyPasswd',
+        path: '/FindMyPasswdView',
+        exact: true,
+        component: FindMyPasswdView,
     },
     {
         id: 'ticket1',
