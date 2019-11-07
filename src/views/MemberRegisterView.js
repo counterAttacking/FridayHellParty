@@ -26,6 +26,7 @@ const MemberRegisterView = () => (
             <span>이메일 </span><input id="Email" type="text"  placeholder="이메일"/><br/>
             <input type="submit" formAction="/" value="회원가입"></input>
             <input type="reset" value="취소"/>
+            
         </fieldset></form>
     </Container>
 );
