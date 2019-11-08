@@ -2,16 +2,14 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-    width : 40%;
+    width : 50%;
     margin : 0 auto;
-    
 `;
 
 
 const TicketingView1 = () => (
     <Container>
         <form>
-
         <fieldset>
             <div align = "center">
             공연날짜 <input type="none" value ="2019-10-31-19:00" readOnly/> &nbsp;
