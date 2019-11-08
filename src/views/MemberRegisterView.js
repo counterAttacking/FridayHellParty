@@ -14,7 +14,7 @@ const MemberRegisterView = () => (
         </span>
         <div>
             <button formAction="/LoginView">로그인</button>
-            <a href="/FindMyIdView">아이디 찾기 </a><a href="/FindMyPasswdView"> 아이디 찾기</a>
+            <a href="/FindMyIdView">아이디 찾기 </a><a href="/FindMyPasswdView"> 비밀번호 찾기</a>
         </div>
         <fieldset>
             <span>ID </span><input id="ID" type="text" placeholder="아이디 입력"/>
