@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, {Component} from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -52,28 +52,55 @@ const InforD = styled.div`
 const InforA = styled.a`text-decoration:none;`;
 const InforH3 = styled.h3` display:inline-block`;
 const InforP = styled.p` display:inline-block`;
-const FindMyPasswdView = () => (
-    <Container>
-        <Logo>Logo</Logo>
-        <form align="center">
-            
-            <IDiv>
-                <InforH3>비밀번호 찾기</InforH3>
-                <InforD>
-                    <InforP><InforA href="/LoginView">로그인 </InforA>&nbsp;<InforA href="/MemberRegisterView">회원가입</InforA></InforP>
-                </InforD>
-                <Minput type="text" placeholder="아이디 " /><br /><br />
-                <Minput type="text" placeholder="이름 " /><br /><br />
-                <Minput type="text" placeholder="휴대폰 번호 -없이" />
-                 <br /><br />
-            </IDiv>
-            <br /><br />
-            
-            <Minput2 type="submit" value="확인"  /><br /><br />
-                
-            
-        </form>
-    </Container>
-);
+
+class FindMyPasswdView extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+          ID : "",
+          Name: "",
+          PhoneNum: ""
+        }
+        
+    }
+    Information =()=>{
+        alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
+    }
+    InputID = (e) =>{
+        this.setState({
+            ID: e.target.value,
+        });
+    }
+    InputName = (e) =>{
+        this.setState({
+            Name: e.target.value,
+        });
+    }
+    InputPhone = (e) =>{
+        this.setState({
+            PhoneNum: e.target.value,
+        });
+    }
+    render(){
+        return(
+            <Container>
+                <Logo>Logo</Logo>
+                <form align="center">
+                    <IDiv>
+                     <InforH3>비밀번호 찾기</InforH3>
+                        <InforD>
+                            <InforP><InforA href="/LoginView">로그인 </InforA>&nbsp;<InforA href="/MemberRegisterView">회원가입</InforA></InforP>
+                        </InforD>
+                        <Minput type="text" placeholder="아이디 " onChange={this.InputID} /><br /><br />
+                        <Minput type="text" placeholder="이름 " onChange={this.InputName}/><br /><br />
+                        <Minput type="text" placeholder="휴대폰 번호 -없이" onChange={this.InputPhone}/> <br /><br />
+                    </IDiv> <br /><br />
+                    <Minput2 type="submit" value="확인" onClick={this.Information} /><br /><br />
+                </form>
+             </Container>
+    );
+    }
+}
 
 export default FindMyPasswdView;
