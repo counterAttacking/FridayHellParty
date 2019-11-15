@@ -41,6 +41,9 @@ const Logo = styled.div`
     left:25%;
     text-align:center;
     font-size:200%;
+    &:hover {
+        color:#00ff00;
+    }
 `;
 const InforD = styled.div`
     position:absolute;
@@ -58,14 +61,23 @@ class FindMyPasswdView extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          ID : "",
-          Name: "",
-          PhoneNum: ""
+          ID : null,
+          Name: null,
+          PhoneNum: null,
+          URL : ""
         }
-        
     }
     Information =()=>{
-        alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
+        if(this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null){
+            alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
+            window.location.href='https://locallhost:3000';
+            
+        }
+        else{
+            alert("모든 항목을 입력해 주세요");
+        }
+
+        return;
     }
     InputID = (e) =>{
         this.setState({
