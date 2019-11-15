@@ -5,7 +5,6 @@ const Container = styled.div`
     width : 80%;
     margin : 0 auto;
     align:center;
-   
 `;
 const IDiv = styled.div`
     position:relative;
@@ -14,7 +13,6 @@ const IDiv = styled.div`
    text-align:left;
    padding:10px;
    width:50%;
-   
 `;
 
 const Minput = styled.input`
@@ -41,18 +39,20 @@ const Logo = styled.div`
     left:25%;
     text-align:center;
     font-size:200%;
+    cursor:pointer;
     &:hover {
-        color:#00ff00;
+        background:#ff00ff;
+        transition: all 1s;
+        transform:scale(1.3);
     }
 `;
 const InforD = styled.div`
     position:absolute;
     display:inline-block;
     right:5px;
-    
-
 `;
-const InforA = styled.a`text-decoration:none;`;
+
+const InforA = styled.a`text-decoration:none; &:visited{color:black;} &:hover{color:#00ff00;}`;
 const InforH3 = styled.h3` display:inline-block`;
 const InforP = styled.p` display:inline-block`;
 
@@ -70,13 +70,13 @@ class FindMyPasswdView extends React.Component {
     Information =()=>{
         if(this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null){
             alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
-            window.location.href='https://locallhost:3000';
-            
+
+            window.location.replace("http://localhost:3000/LoginView");
+            alert('ss');
         }
         else{
             alert("모든 항목을 입력해 주세요");
         }
-
         return;
     }
     InputID = (e) =>{
@@ -97,8 +97,9 @@ class FindMyPasswdView extends React.Component {
     render(){
         return(
             <Container>
-                <Logo>Logo</Logo>
-                <form align="center">
+                <Logo><InforA href="/">LOGO</InforA></Logo>
+                    <div align="center">
+
                     <IDiv>
                      <InforH3>비밀번호 찾기</InforH3>
                         <InforD>
@@ -109,7 +110,8 @@ class FindMyPasswdView extends React.Component {
                         <Minput type="text" placeholder="휴대폰 번호 -없이" onChange={this.InputPhone}/> <br /><br />
                     </IDiv> <br /><br />
                     <Minput2 type="submit" value="확인" onClick={this.Information} /><br /><br />
-                </form>
+
+                    </div>
              </Container>
     );
     }
