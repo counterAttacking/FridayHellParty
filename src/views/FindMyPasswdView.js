@@ -15,9 +15,11 @@ const IDiv = styled.div`
    width:50%;
 `;
 
+
 const Minput = styled.input`
-    width:100%;
-    padding : 1.5em 0em 1.5em 0em;
+width:100%;
+font-size:150%;
+padding : .5em 0em .5em 0em;
     
 `;
 const Minput2 = styled.input`
@@ -41,9 +43,8 @@ const Logo = styled.div`
     font-size:200%;
     cursor:pointer;
     &:hover {
-        background:#ff00ff;
-        transition: all 1s;
-        transform:scale(1.3);
+        background:#00ff00;
+        transition: all 0.5s;
     }
 `;
 const InforD = styled.div`
@@ -52,7 +53,7 @@ const InforD = styled.div`
     right:5px;
 `;
 
-const InforA = styled.a`text-decoration:none; &:visited{color:black;} &:hover{color:#00ff00;}`;
+const InforA = styled.a`text-decoration:none; &:visited{color:black;} `;
 const InforH3 = styled.h3` display:inline-block`;
 const InforP = styled.p` display:inline-block`;
 
@@ -70,7 +71,6 @@ class FindMyPasswdView extends React.Component {
     Information =()=>{
         if(this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null){
             alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
-
             window.location.replace("http://localhost:3000/LoginView");
             alert('ss');
         }
@@ -97,7 +97,7 @@ class FindMyPasswdView extends React.Component {
     render(){
         return(
             <Container>
-                <Logo><InforA href="/">LOGO</InforA></Logo>
+                <InforA href="/"><Logo>LOGO</Logo></InforA>
                     <div align="center">
 
                     <IDiv>
