@@ -72,7 +72,6 @@ class FindMyPasswdView extends React.Component {
         if(this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null){
             alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
             window.location.replace("http://localhost:3000/LoginView");
-            alert('ss');
         }
         else{
             alert("모든 항목을 입력해 주세요");
@@ -99,7 +98,7 @@ class FindMyPasswdView extends React.Component {
             <Container>
                 <InforA href="/"><Logo>LOGO</Logo></InforA>
                     <div align="center">
-
+                        
                     <IDiv>
                      <InforH3>비밀번호 찾기</InforH3>
                         <InforD>
