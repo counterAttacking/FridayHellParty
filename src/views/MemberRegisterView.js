@@ -88,6 +88,10 @@ const IdDiv = styled.div`
 const IdInput = styled.input`
     font-size : 150%;
     margin : 0 44px;
+    &:focus {
+            background : #e5f0f9;
+            border : 0;
+        }
 `;
 
 const IdCheck = styled.input`
@@ -105,6 +109,10 @@ const PasswdDiv = styled.div`
 const PasswdInput = styled.input`
     font-size : 150%;
     margin : 0 28px;
+    &:focus {
+            background : #e5f0f9;
+            border : 0;
+        }
 `;
 
 const NameDiv = styled.div`
@@ -114,6 +122,10 @@ const NameDiv = styled.div`
 const NameInput = styled.input`
     font-size : 150%;
     margin : 0 60px;
+    &:focus {
+        background : #e5f0f9;
+        border : 0;
+    }
 `;
 
 const BirthDiv = styled.div`
@@ -123,6 +135,10 @@ const BirthDiv = styled.div`
 const BirthInput = styled.input`
     font-size : 150%;
     margin : 0 30px;
+    &:focus {
+        background : #e5f0f9;
+        border : 0;
+    }
 `;
 
 const PhoneDiv = styled.div`
@@ -131,6 +147,10 @@ const PhoneDiv = styled.div`
 
 const PhoneInput = styled.input`
     font-size : 150%;
+    &:focus {
+        background : #e5f0f9;
+        border : 0;
+    }
 `;
 
 const MailDiv = styled.div`
@@ -140,6 +160,10 @@ const MailDiv = styled.div`
 const MailInput = styled.input`
     font-size : 150%;
     margin : 0 49px;
+    &:focus {
+        background : #e5f0f9;
+        border : 0;
+    }
 `;
 
 const ButtonDiv = styled.div`
