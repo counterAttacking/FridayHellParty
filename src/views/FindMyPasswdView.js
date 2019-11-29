@@ -42,10 +42,7 @@ const Logo = styled.div`
     text-align:center;
     font-size:200%;
     cursor:pointer;
-    &:hover {
-        background:#00ff00;
-        transition: all 0.5s;
-    }
+    
 `;
 const InforD = styled.div`
     position:absolute;
