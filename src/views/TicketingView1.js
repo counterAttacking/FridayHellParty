@@ -16,10 +16,7 @@ const Logo = styled.div`
     text-align:center;
     font-size:200%;
     cursor:pointer;
-    &:hover {
-        background:#00ff00;
-        transition: all 0.5s;
-    }
+    
 `;
 const InforD = styled.div`
     position:relative;
@@ -67,10 +64,7 @@ const Button2 = styled.div`
     text-align:center;
     font-size:200%;
     cursor:pointer;
-    &:hover {
-        background:#00ff00;
-        transition: all 0.5s;
-    }
+  
 `;
 /*예매하기 버튼*/
 
@@ -80,7 +74,7 @@ const TicketingView1 = () => (
         <header>
             <InforA href="/"><Logo>LOGO</Logo></InforA>
             <InforD>
-                <InforA href="/LoginView">로그인 </InforA>&nbsp;<InforA href="/MemberRegisterView">회원가입</InforA>
+                <InforA href="/LoginView">내정보 </InforA>&nbsp;<InforA href="/MemberRegisterView">예약확인</InforA>
             </InforD>
         </header>
         <fieldset  >
