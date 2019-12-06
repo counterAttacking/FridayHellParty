@@ -65,9 +65,6 @@ class LoginView extends React.Component {
         super(props);
     }
 
-    clickLoginButton = () => {
-        
-    }
     render() {
 
         return (
