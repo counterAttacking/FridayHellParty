@@ -104,7 +104,7 @@ class TicketingView1 extends React.Component {
         <fieldset  >
             <div align="center">
                 <InfoConsert>
-                        <img src={"http://ticketimage.interpark.com/Play/image/large/19/19016399_p.gif"}/>
+                        <img src={this.state.ShowInfoList[ShowId-1].img}/>
                         <br/>
                     
                 </InfoConsert>
@@ -112,16 +112,16 @@ class TicketingView1 extends React.Component {
                     <Con2_P>공연 날짜</Con2_P>{this.state.ShowInfoList[ShowId-1].date}
                 </InfoCon2><br/>
                 <InfoCon2>
-                    <Con2_P>가격</Con2_P> 15000 원
+                    <Con2_P>가격</Con2_P> {this.state.ShowInfoList[ShowId-1].price} 원
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>관람 시간</Con2_P> 70분
+                    <Con2_P>관람 시간</Con2_P> {this.state.ShowInfoList[ShowId-1].time}분
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>장소</Con2_P> 서울 종합운동장
+                    <Con2_P>장소</Con2_P> {this.state.ShowInfoList[ShowId-1].Place}
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>관람 등급</Con2_P> 12세 이상 관람가
+                    <Con2_P>관람 등급</Con2_P> {this.state.ShowInfoList[ShowId-1].Rank}
                 </InfoCon2>
             </div>
             
