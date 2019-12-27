@@ -40,7 +40,7 @@ const routes = [
     },
     {
         id: 'ticket1',
-        path: '/TicketingView1',
+        path: '/TicketingView1/:ShowId',
         exact: true,
         component: TicketingView1,
     },
