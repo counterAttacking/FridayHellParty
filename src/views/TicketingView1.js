@@ -88,7 +88,9 @@ class TicketingView1 extends React.Component {
           ]
         }
     }
+    Ticketing = () =>{
 
+    }
     render(){
        
        const {match} = this.props;
@@ -125,7 +127,7 @@ class TicketingView1 extends React.Component {
                 </InfoCon2>
             </div>
             
-       <Button href = "/TicketingView2">
+       <Button href = {"/TicketingView2/" + ShowId}>
                  <Button2>예매하기</Button2>
             </Button>
         </fieldset>
