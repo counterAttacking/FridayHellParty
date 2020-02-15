@@ -248,6 +248,7 @@ class MemberRegisterView extends Component {
                     birthday: this.state.userbirthday,
                     email: this.state.useremail,
                 },
+                
             });
             const {status, data} = await request;
           alert("회원가입이 완료 되었습니다.");

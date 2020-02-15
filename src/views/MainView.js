@@ -111,6 +111,7 @@ const fakeAuth = {
       this.isAuthenticated = false
       sessionStorage.removeItem('userid');
       setTimeout(cb, 100)
+      window.location.replace('/');
     }
   }
   const Public = () => <h3>Public</h3>
