@@ -46,12 +46,12 @@ const Logo = styled.span`
 
 const Box = styled.div`
     overflow : hidden;
+    align:right;
 `;
 
 const Lgnb = styled.div`
-    position : relative;
-    
-    left : 60%; top : 0;
+    align:right;
+     top : 0;
 `;
 
 const LoginInput = styled.input`
@@ -65,6 +65,8 @@ const LoginInput = styled.input`
 `;
 
 const NavUl = styled.ul`
+    position:relative;
+    left:0;
     float : right;
     padding : 5px 10px;
     display : inline-block;
@@ -74,10 +76,10 @@ const NavLi = styled.li`
     list-style : none;
     float : left;
     margin-right : 10px;
-    font-size : 120%;
+    font-size : 15px;
 `;
 const Input = styled.input`
-    width : 20%; height : 20px;
+    width : 100%; height : 20px;
     font-size : 110%;
     margin : 1% 0;
     &:focus {
@@ -86,7 +88,7 @@ const Input = styled.input`
     }
 `;
 const LoginButton = styled.button`
-    width : 20%;
+    width : 100%;
     height : 30px;
     font-size : 120%;
     background : #22b8cf;
@@ -94,12 +96,13 @@ const LoginButton = styled.button`
     margin : 1% 0 2% 0;
 `;
 const Logindiv = styled.div`
-width : 20%;
-left: 15%;
+    width : 20%;
+    float :right;
     position:relative;
     display:inline;
     right:5px;
 `;
+
 // The end point of header
 const fakeAuth = {
     isAuthenticated: JSON.parse(sessionStorage.getItem('userid'))?true:false,
@@ -182,14 +185,17 @@ class MainView extends React.Component {
         // }
         
         return(<div>
+            
+
             <Input type="text" placeholder="아이디" onChange={this.inputUserid}/><br/>
             <Input type="password" placeholder="비밀번호" onChange={this.inputUserpasswd}/><br/>
             <LoginButton onClick={this.login}>로그인</LoginButton>
+            
             <NavUl>
-                         <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
-                         <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
-                            <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
-                        </NavUl>
+                <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
+                <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
+                <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
+            </NavUl>
           </div>)
     }
 }
