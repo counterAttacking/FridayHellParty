@@ -185,6 +185,11 @@ class MainView extends React.Component {
             <Input type="text" placeholder="아이디" onChange={this.inputUserid}/><br/>
             <Input type="password" placeholder="비밀번호" onChange={this.inputUserpasswd}/><br/>
             <LoginButton onClick={this.login}>로그인</LoginButton>
+            <NavUl>
+                         <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
+                         <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
+                            <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
+                        </NavUl>
           </div>)
     }
 }
@@ -202,7 +207,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   const AuthButton = withRouter(({ history }) => (
     fakeAuth.isAuthenticated ? (
       <p>
-        {JSON.parse(sessionStorage.getItem('userid'))} <button onClick={() => {
+        {JSON.parse(sessionStorage.getItem('userid'))}님 <button onClick={() => {
           fakeAuth.signout(() => history.push('/'))
         }}>로그아웃</button>
       </p>
@@ -226,11 +231,7 @@ export default function AuthExample () {
                             </Logindiv>
                         </Router>
                         </Lgnb>
-                     <NavUl>
-                         <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
-                         <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
-                            <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
-                        </NavUl>
+                     
                     </Box>
                 </header>
                 <section>
