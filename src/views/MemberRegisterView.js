@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-
+import axios from 'axios';
 // The start of initialize Style
 const Container = styled.div`
     width : 80%;
@@ -191,8 +191,69 @@ const RegisterInput2 = styled.input`
 class MemberRegisterView extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            userid:"",
+            username:"",
+            usertel:"",
+            userbirthday:"",
+            useremail:"",
+            userpassword:"",
+        }
     }
+    inputUserid =(e)=>{
+        this.setState({
+          userid:e.target.value,
+        });
+      }
+      inputUserpasswd =(e)=>{
+        this.setState({
+          userpassword:e.target.value,
+        });
+      }
+      inputUsername =(e)=>{
+        this.setState({
+          username:e.target.value,
+        });
+      }
+      inputUserbirthday =(e)=>{
+        this.setState({
+          userbirthday:e.target.value,
+        });
+      }
+      inputUseremail =(e)=>{
+        this.setState({
+          useremail:e.target.value,
+        });
+      }
+      inputUsertel =(e)=>{
+        this.setState({
+          usertel:e.target.value,
+        });
+      }
 
+      login = async() => {
+        if(this.state.userid.length < 1 || this.state.userpassword < 1 || this.state.username < 1
+            || this.state.userbirthday < 1 || this.state.useremail < 1 || this.state.usertel< 1){
+          alert("모든항목을 입력해주세요");
+        }
+        else{
+            const request = axios({
+                url:'http://localhost:5000/userinfo', 
+                method:'post',
+                data:{
+                    id: this.state.userid,
+                    name: this.state.username,
+                    password: this.state.userpassword,
+                    tel: this.state.usertel,
+                    birthday: this.state.userbirthday,
+                    email: this.state.useremail,
+                },
+            });
+            const {status, data} = await request;
+          alert("회원가입이 완료 되었습니다.");
+          window.location.replace('/');
+        }
+      }
     render() {
         return (
             <Container>
@@ -216,31 +277,31 @@ class MemberRegisterView extends Component {
                             <RegisterForm>
                                 <IdDiv>
                                     <FormSpan>아이디</FormSpan>
-                                    <IdInput type="text" placeholder="" />
+                                    <IdInput type="text" placeholder="" onChange={this.inputUserid} />
                                     <IdCheck type="button" value="중복확인" />
                                 </IdDiv>
                                 <PasswdDiv>
                                     <FormSpan>비밀번호</FormSpan>
-                                    <PasswdInput type="password" placeholder="" />
+                                    <PasswdInput type="password" placeholder="" onChange={this.inputUserpasswd} />
                                 </PasswdDiv>
                                 <NameDiv>
                                     <FormSpan>이름</FormSpan>
-                                    <NameInput type="text" placeholder="" />
+                                    <NameInput type="text" placeholder="" onChange={this.inputUsername}/>
                                 </NameDiv>
                                 <BirthDiv>
                                     <FormSpan>생년월일</FormSpan>
-                                    <BirthInput type="text" placeholder="ex)2019.01.01" />
+                                    <BirthInput type="text" placeholder="ex)2019.01.01" onChange={this.inputUserbirthday} />
                                 </BirthDiv>
                                 <PhoneDiv>
                                     <FormSpan>휴대전화번호</FormSpan>
-                                    <PhoneInput type="text" placeholder="ex)010-0000-0000" />
+                                    <PhoneInput type="text" placeholder="ex)010-0000-0000" onChange={this.inputUsertel} />
                                 </PhoneDiv>
                                 <MailDiv>
                                     <FormSpan>이메일</FormSpan>
-                                    <MailInput type="email" placeholder="ex)mail@mail.com" />
+                                    <MailInput type="email" placeholder="ex)mail@mail.com" onChange={this.inputUseremail}/>
                                 </MailDiv>
                                 <ButtonDiv>
-                                    <RegisterInput1 type="submit" value="회원가입" />
+                                    <RegisterInput1 type="submit" value="회원가입" onClick ={this.login} />
                                     <Link href="/MemberRegisterView"><RegisterInput2 type="reset" value="취소" /></Link>
                                 </ButtonDiv>
                             </RegisterForm>
