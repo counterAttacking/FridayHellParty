@@ -155,8 +155,9 @@ class MainView extends React.Component {
             this.login2();
             window.location.replace('/');
           }
-          else if(data === "-1"){
-            alert("로그인 실패");
+          else if(data === "-fail-"){
+            alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            window.location.replace('/');
           }
           console.log(data);
         }
