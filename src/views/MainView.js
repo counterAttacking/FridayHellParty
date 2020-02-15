@@ -1,14 +1,21 @@
 ﻿import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import TicketingView1 from './TicketingView1';
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from 'react-router-dom';
+import axios from 'axios';
 // The start of initialize Style
 const Container = styled.div`
     width : 80%;
     margin : 0 auto;
 `;
 
-const Link = styled.a`
+const Link1 = styled.a`
     text-decoration : none;
     color : black;
     &:hover {
@@ -43,6 +50,7 @@ const Box = styled.div`
 
 const Lgnb = styled.div`
     position : relative;
+    
     left : 60%; top : 0;
 `;
 
@@ -68,42 +76,158 @@ const NavLi = styled.li`
     margin-right : 10px;
     font-size : 120%;
 `;
+const Input = styled.input`
+    width : 20%; height : 20px;
+    font-size : 110%;
+    margin : 1% 0;
+    &:focus {
+        background : #e5f0f9;
+        border : 0;
+    }
+`;
+const LoginButton = styled.button`
+    width : 20%;
+    height : 30px;
+    font-size : 120%;
+    background : #22b8cf;
+    border : 0;
+    margin : 1% 0 2% 0;
+`;
+const Logindiv = styled.div`
+width : 20%;
+left: 15%;
+    position:relative;
+    display:inline;
+    right:5px;
+`;
 // The end point of header
-
+const fakeAuth = {
+    isAuthenticated: JSON.parse(sessionStorage.getItem('userid'))?true:false,
+    authenticate(cb) {
+      this.isAuthenticated = true
+      setTimeout(cb, 100)
+    },
+    signout(cb) {
+      this.isAuthenticated = false
+      sessionStorage.removeItem('userid');
+      setTimeout(cb, 100)
+    }
+  }
+  const Public = () => <h3>Public</h3>
+  const Protected = () => <h3>Protected</h3>
 class MainView extends React.Component {
-    constructor(props){
+    state = {
+        redirectToReferrer: JSON.parse(sessionStorage.getItem('userid'))?true:false
+      }
+      constructor(props) {
         super(props);
         this.state = {
-          ShowInfoList:[
-              {id:1, img:"http://ticketimage.interpark.com/Play/image/large/19/19016399_p.gif", date:"2019-10-31-19:00",
-            price:15000, time:70, Place:"서울 종합운동장", Rank:"12세 이상 관람가" },
-            {id:2, img:"http://ticketimage.interpark.com/Play/image/large/19/19011808_p.gif", date:"2020-01-05-16:00",
-            price:25000, time:90, Place:"서울 종합운동장", Rank:"전체이용가" },
-            {id:3, img:"http://ticketimage.interpark.com/Play/image/large/19/19011716_p.gif", date:"2020-01-10-20:00",
-            price:35000, time:120, Place:"서울 종합운동장", Rank:"15세 이용가" },
-            {id:4, img:"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191030034415_19016188.gif", date:"2020-01-01-17:00",
-            price:20000, time:100, Place:"서울 종합운동장", Rank:"12세 이용가" },
-            {id:5, img:"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191014115354_19014994.gif", date:"2020-01-10-20:00",
-            price:35000, time:150, Place:"서울 종합운동장", Rank:"15세 이용가" },
-            
-          ]
+          userinfo:[],
+          userid:"",
+          userpassword:"",
+          
         }
-    }
+      }
+      inputUserid =(e)=>{
+        this.setState({
+          userid:e.target.value,
+        });
+      }
+      inputUserpasswd =(e)=>{
+        this.setState({
+          userpassword:e.target.value,
+        });
+      }
+      login = async() => {
+        if(this.state.userid.length < 1 || this.state.userpassword < 1){
+          alert("모든항목을 입력해주세요");
+        }
+        else{
+          const request = axios.post('http://localhost:5000/forlogin/'+this.state.userid, {
+              id: this.state.userid,
+              password: this.state.userpassword,
+          });
+          const {status, data} = await request;
+          if(data === this.state.userid){
+            alert("로그인 성공");
+            sessionStorage.setItem('userid', JSON.stringify(data));
+            this.login2();
+            window.location.replace('/');
+          }
+          else if(data === "-1"){
+            alert("로그인 실패");
+          }
+          console.log(data);
+        }
+      }
+      login2 =()=>{
+        fakeAuth.authenticate(() => {
+            this.setState(() => ({
+              redirectToReferrer: true
+            }))
+          })
+      }
+    
 
     render(){ 
-      
-        return(
-            <Container>
+        //const { from } = this.props.location.state || { from: { pathname: '/' } }
+        const { redirectToReferrer } = this.state
+        var dd = redirectToReferrer
+        console.log(dd)
+        
+        // if (redirectToReferrer === true) {
+        //   return <Redirect to={from} />
+        // }
+        
+        return(<div>
+            <Input type="text" placeholder="아이디" onChange={this.inputUserid}/><br/>
+            <Input type="password" placeholder="비밀번호" onChange={this.inputUserpasswd}/><br/>
+            <LoginButton onClick={this.login}>로그인</LoginButton>
+          </div>)
+    }
+}
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      fakeAuth.isAuthenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{
+            pathname: '/',
+            state: { from: props.location }
+          }} />
+    )} />
+  )
+
+  const AuthButton = withRouter(({ history }) => (
+    fakeAuth.isAuthenticated ? (
+      <p>
+        {JSON.parse(sessionStorage.getItem('userid'))} <button onClick={() => {
+          fakeAuth.signout(() => history.push('/'))
+        }}>로그아웃</button>
+      </p>
+    ) : (
+      <MainView/>
+    )
+  ))
+export default function AuthExample () {
+    return (
+      <div>
+  <Container>
                 <header>
                  <Logo>
-                       <Link href="/">로고</Link>
+                       <Link1 href="/">로고</Link1>
                     </Logo>
                     <Box>
-                        <Lgnb><Link href="/LoginView"><LoginInput type="button" value="로그인" /></Link></Lgnb>
+                        <Lgnb>
+                        <Router>
+                            <Logindiv>
+                                <AuthButton/>
+                            </Logindiv>
+                        </Router>
+                        </Lgnb>
                      <NavUl>
-                         <NavLi><Link href="/FindMyIdView">아이디 찾기</Link></NavLi>
-                         <NavLi><Link href="/FindMyPasswdView">비밀번호 찾기</Link></NavLi>
-                            <NavLi><Link href="/MemberRegisterView">회원가입</Link></NavLi>
+                         <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
+                         <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
+                            <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
                         </NavUl>
                     </Box>
                 </header>
@@ -138,8 +262,7 @@ class MainView extends React.Component {
                     <h3>Copyright FridayHellParty. All rights reserved.</h3>
                 </footer>
             </Container>
-        );
-    }
-}
-
-export default MainView;
+      
+      </div>
+    )
+  }
