@@ -241,12 +241,12 @@ class MemberRegisterView extends Component {
                 url:'http://localhost:5000/userinfo', 
                 method:'post',
                 data:{
-                    id: this.state.userid,
-                    name: this.state.username,
+                    userid: this.state.userid,
+                    username: this.state.username,
                     password: this.state.userpassword,
-                    tel: this.state.usertel,
-                    birthday: this.state.userbirthday,
-                    email: this.state.useremail,
+                    usertel: this.state.usertel,
+                    userbirthday: this.state.userbirthday,
+                    useremail: this.state.useremail,
                 },
                 
             });

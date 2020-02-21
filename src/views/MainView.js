@@ -147,22 +147,18 @@ class MainView extends React.Component {
           alert("모든항목을 입력해주세요");
         }
         else{
-          const request = axios.post('http://localhost:5000/forlogin/'+this.state.userid, {
-              id: this.state.userid,
+          try{const request = axios.post('http://localhost:5000/forlogin/'+this.state.userid, {
+              userid: this.state.userid,
               password: this.state.userpassword,
-          });
-          const {status, data} = await request;
-          if(data === this.state.userid){
+            });
+            const {status, data} = await request;
             alert("로그인 성공");
             sessionStorage.setItem('userid', JSON.stringify(data));
             this.login2();
             window.location.replace('/');
-          }
-          else if(data === "-fail-"){
+          }catch(err){
             alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-            window.location.replace('/');
           }
-          console.log(data);
         }
       }
       login2 =()=>{
@@ -213,7 +209,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   const AuthButton = withRouter(({ history }) => (
     fakeAuth.isAuthenticated ? (
       <p>
-        {JSON.parse(sessionStorage.getItem('userid'))}님 <button onClick={() => {
+        님 <button onClick={() => {
           fakeAuth.signout(() => history.push('/'))
         }}>로그아웃</button>
       </p>
@@ -228,6 +224,7 @@ export default function AuthExample () {
                 <header>
                  <Logo>
                        <Link1 href="/">로고</Link1>
+                       
                     </Logo>
                     <Box>
                         <Lgnb>
