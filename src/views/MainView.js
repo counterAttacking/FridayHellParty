@@ -239,12 +239,12 @@ export default function AuthExample () {
                 </header>
                 <section>
                     <div>
-                        <img src={"http://ticketimage.interpark.com/TCMS4/Main/201910/MainVisual_69bcde11-f7b3-4cd2-90d5-a79dc6c4e353.jpg"} alt={"메인 배너"} width="100%" />  {/* 이미지가 실시간으로 변경 */}
+                        <img src={"http://ticketimage.interpark.com/TCMS4/Main/201912/MainVisual_248b4c8d-44b6-4617-860b-64f2870e6b4f.png"} alt={"메인 배너"} width="100%" />  {/* 이미지가 실시간으로 변경 */}
                  </div>
                     <div>
                       <br />
                      <a href="/TicketingView1/1">
-                            <img src={"http://ticketimage.interpark.com/Play/image/large/19/19016399_p.gif"} alt={"이미지가 없어요"} />
+                            <img src={"http://ticketimage.interpark.com/TCMS4/Main/202001/MainVisual_6e60f36a-b989-47f6-8cc5-1b885c699874.png"} alt={"이미지가 없어요"} />
                      </a>
                         <a href="/TicketingView1/2">
                          <img src={"http://ticketimage.interpark.com/Play/image/large/19/19011808_p.gif"} alt={"이미지가 없어요"} />
