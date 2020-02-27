@@ -120,7 +120,7 @@ class TicketingView2 extends React.Component {
     SeatClick=(row, col, SeatClick)=>{ //좌석 클릭했을때
         this.setState(this.state.map1[row][col] = {
             id: col,
-            backG:{background : this.state.SeatColor,
+            backG:{background : this.state.SeatColor, //색 바꿈
                 //position:'static',
                 display:'inline-block',
                 padding: '5px',
@@ -128,8 +128,8 @@ class TicketingView2 extends React.Component {
                 cursor:'pointer',
                 width: '20px',
                 height: '20px'},
-            Seat:this.state.map1[row][col].Seat,
-            SeatClick: !SeatClick,
+            Seat:this.state.map1[row][col].Seat, 
+            SeatClick: !SeatClick, 
         });
     }
     //예약 되어있는 좌석 불러오기
@@ -190,7 +190,7 @@ class TicketingView2 extends React.Component {
         // }
 
        this.Seat=(row, col, SeatClick, Seat)=>{ 
-           if(Seat){
+           if(Seat){ //예약 가능한 자리인지 확인
                const c1 = !SeatClick ? '#00ff00': '#b34040';
                this.state.SeatColor = c1;
                this.SeatClick(row,col,SeatClick);
