@@ -188,7 +188,7 @@ class TicketingView2 extends React.Component {
         //         width: '20px',
         //         height: '20px'}
         // }
-        
+
        this.Seat=(row, col, SeatClick, Seat)=>{ 
            if(Seat){
                const c1 = !SeatClick ? '#00ff00': '#b34040';
@@ -199,8 +199,6 @@ class TicketingView2 extends React.Component {
                 alert("이미 예약된 좌석입니다.");
             }
        }
-     
-
         return (
             <Container>
                 <div align='center'>
