@@ -1,13 +1,6 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
-  } from 'react-router-dom';
-  import axios from 'axios';
+
 const Container = styled.div`
     width : 80%;
     margin : 0 auto;
