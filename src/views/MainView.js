@@ -132,6 +132,11 @@ class MainView extends React.Component {
           
         }
       }
+      enterKeydown=(e)=>{
+        if(e.charCode === 13){
+          this.login();
+        };
+      }
       inputUserid =(e)=>{
         this.setState({
           userid:e.target.value,
@@ -183,8 +188,8 @@ class MainView extends React.Component {
         return(<div>
             
 
-            <Input type="text" placeholder="아이디" onChange={this.inputUserid}/><br/>
-            <Input type="password" placeholder="비밀번호" onChange={this.inputUserpasswd}/><br/>
+            <Input type="text" placeholder="아이디" onChange={this.inputUserid} onKeyPress={this.enterKeydown}/><br/>
+            <Input type="password" placeholder="비밀번호" onChange={this.inputUserpasswd} onKeyPress={this.enterKeydown}/><br/>
             <LoginButton onClick={this.login}>로그인</LoginButton>
             
             <NavUl>
