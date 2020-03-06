@@ -91,6 +91,7 @@ class TicketingView2 extends React.Component {
             count:0,
             map1:[], //좌석정보
             Reser:[],
+            concertN:[],
         }
     }
     
@@ -105,7 +106,7 @@ class TicketingView2 extends React.Component {
         this.setState({
             concert: data,
         });
-        console.log(concert);
+        console.log(this.state.concert);
     }
     
     SeatClick=(row, col, SeatClick)=>{ //좌석 클릭했을때
@@ -150,15 +151,28 @@ class TicketingView2 extends React.Component {
         sessionStorage.setItem('reservationInfo', JSON.stringify(this.state.Reser));
         console.log(this.state.Reser);
       }
+      import_Concert = async(id) => { 
+        const request = axios({
+            url:'http://localhost:5000/getConcert/'+id,
+            mathod:'get',
+          });
+          const {status, data} = await request;
+          this.setState({
+              concertN: data.name
+          })
+          this.import_Reservation_Seat(this.state.concertN);
+      }
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
         const { concert } = this.state;
-        const concertN = queryParser.parse(window.location.search).concertname;
+
         
         if(this.state.first){
-            this.import_Reservation_Seat(concertN); //예약되있는 좌석 불러오기
-            
+            this.import_Concert(ShowId);
+             //예약되있는 좌석 불러오기
+             this.componentWillMount();
+            console.log(this.state.concertN);
             for(let i =0;i<10;i++){
                 var col2 = [];
                 for(let j=0;j<20;j++){
