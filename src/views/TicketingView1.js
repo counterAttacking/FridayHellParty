@@ -79,7 +79,7 @@ class TicketingView1 extends React.Component {
         }
     }
 
-    componentWillMount = async () => {
+    componentWillMount = async () => {//데이터 베이스
         const { match } = this.props;
         const request = axios({
             url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
@@ -115,7 +115,7 @@ class TicketingView1 extends React.Component {
                             <Con2_P>공연 날짜</Con2_P>{concert.date}
                         </InfoCon2>
                         <InfoCon2>
-                            <Con2_P>가격</Con2_P> {concert.price} 원
+                            <Con2_P>가격 (1인 기준)</Con2_P> {concert.price} 원
                         </InfoCon2>
                         <InfoCon2>
                             <Con2_P>관람 시간</Con2_P> {concert.time}분

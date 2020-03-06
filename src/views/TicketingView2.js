@@ -8,7 +8,20 @@ const Container = styled.div`
     margin : 0 auto;
     align:center;
 `;
-
+const Con2_P = styled.span`  
+    float:left;
+    font-weight:bold;
+`;
+//밑에 바꿀게요
+const InfoCon2 = styled.div` 
+    width:330px;
+    font-size : 120%;
+    padding: 40px;
+    text-align:right;
+    align:left;
+    display:inline-block;
+    
+`;
 const Link1 = styled.a`
     text-decoration : none;
     color : black;
@@ -92,10 +105,11 @@ class TicketingView2 extends React.Component {
             map1:[], //좌석정보
             Reser:[],
             concertN:[],
+            totPrice: 0,
         }
     }
     
-    componentWillMount = async () => {
+    componentWillMount = async () => { //데이터 베이스
         const { match } = this.props;
         const request = axios({
             url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
@@ -238,6 +252,17 @@ class TicketingView2 extends React.Component {
                 <ImgDiv>
                         <img src={concert.imgUrl} width={"100%"} align="center" />
                 </ImgDiv>
+                <InfoCon2>
+              <Con2_P>공연 이름 :</Con2_P>{concert.name}
+                </InfoCon2>
+                <InfoCon2 >
+               <Con2_P>공연 날짜 :</Con2_P> {concert.date}
+             </InfoCon2>
+             <InfoCon2>
+             <Con2_P>가격 (1인 기준) :</Con2_P> {concert.price} 원
+             </InfoCon2>
+                
+
                 
                     <DDD>
                     <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
