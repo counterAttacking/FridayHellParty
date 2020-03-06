@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 import queryParser from './queryParser';
-import axios from 'axios';
+import * as axios from 'axios';
+
 const Container = styled.div`
     width : 80%;
     margin : 0 auto;
@@ -83,28 +84,7 @@ class TicketingView2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ShowInfoList: [
-                {
-                    id: 1, img: "http://ticketimage.interpark.com/Play/image/large/19/19016399_p.gif", date: "2019-10-30-19:00",
-                    price: 15000, time: 70, Place: "서울 종합운동장", Rank: "12세 이상 관람가"
-                },
-                {
-                    id: 2, img: "http://ticketimage.interpark.com/Play/image/large/19/19011808_p.gif", date: "2020-01-05-16:00",
-                    price: 25000, time: 90, Place: "서울 종합운동장", Rank: "전체이용가"
-                },
-                {
-                    id: 3, img: "http://ticketimage.interpark.com/Play/image/large/19/19011716_p.gif", date: "2020-01-10-20:00",
-                    price: 35000, time: 120, Place: "서울 종합운동장", Rank: "15세 이용가"
-                },
-                {
-                    id: 4, img: "http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191030034415_19016188.gif", date: "2020-01-01-17:00",
-                    price: 20000, time: 100, Place: "서울 종합운동장", Rank: "12세 이용가"
-                },
-                {
-                    id: 5, img: "http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191014115354_19014994.gif", date: "2020-01-10-20:00",
-                    price: 35000, time: 150, Place: "서울 종합운동장", Rank: "15세 이용가"
-                },
-            ],
+            concert: [],
             SeatColor:'#b34040',
             Seat_Reservation_False:[], //이미 예약되어있는 좌석좌표 서버에서 데이터를 얻어옴
             first:true, 
@@ -113,6 +93,21 @@ class TicketingView2 extends React.Component {
             Reser:[],
         }
     }
+    
+    componentWillMount = async () => {
+        const { match } = this.props;
+        const request = axios({
+            url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
+            method: 'get',
+        });
+        console.log(match.params);
+        const { status, data } = await request;
+        this.setState({
+            concert: data,
+        });
+        console.log(concert);
+    }
+    
     SeatClick=(row, col, SeatClick)=>{ //좌석 클릭했을때
         this.setState(this.state.map1[row][col] = {
             id: col,
@@ -158,7 +153,9 @@ class TicketingView2 extends React.Component {
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
+        const { concert } = this.state;
         const concertN = queryParser.parse(window.location.search).concertname;
+        
         if(this.state.first){
             this.import_Reservation_Seat(concertN); //예약되있는 좌석 불러오기
             
@@ -225,9 +222,8 @@ class TicketingView2 extends React.Component {
             <Container>
                 <div align='center'>
                 <ImgDiv>
-                    <img src={this.state.ShowInfoList[2].img} alt={"No"} align="center" />
-                    <br />
-                    </ImgDiv>
+                        <img src={concert.imgUrl} width={"100%"} align="center" />
+                </ImgDiv>
                 
                     <DDD>
                     <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
