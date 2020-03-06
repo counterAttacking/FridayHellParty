@@ -179,7 +179,6 @@ class MainView extends React.Component {
         //const { from } = this.props.location.state || { from: { pathname: '/' } }
         const { redirectToReferrer } = this.state
         var dd = redirectToReferrer
-        console.log(dd)
         
         // if (redirectToReferrer === true) {
         //   return <Redirect to={from} />
@@ -222,7 +221,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       <MainView/>
     )
   ))
-export default function AuthExample () {
+  // var CC = [];
+  // const getconcert = async()=>{
+  //   const request = axios({
+  //     url:'http://localhost:5000/getConcert',
+  //     mathod:'get',
+  //   });
+  //   const {status, data} = await request;
+  //   CC = data;
+  //   return data;
+  // }
+ 
+export default function AuthExample () {  
+  // var CC2 = [];
+  // CC2 = getconcert();
+  // console.log(CC2);
     return (
       <div>
   <Container>
@@ -245,26 +258,27 @@ export default function AuthExample () {
                 <section>
                     <div>
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/201912/MainVisual_248b4c8d-44b6-4617-860b-64f2870e6b4f.png"} alt={"메인 배너"} width="100%" />  {/* 이미지가 실시간으로 변경 */}
+                        
                  </div>
                     <div>
                       <br />
-                     <a href="/TicketingView1/1">
+                     <a href="/TicketingView1?concertname=2020 THE 신승훈 SHOW">
                             <img src={"http://ticketimage.interpark.com/TCMS4/Main/202001/MainVisual_6e60f36a-b989-47f6-8cc5-1b885c699874.png"} alt={"이미지가 없어요"} />
                      </a>
-                        <a href="/TicketingView1/2">
+                        <a href="/TicketingView1?concertname=2020 Theatre 이문세">
                          <img src={"http://ticketimage.interpark.com/Play/image/large/19/19011808_p.gif"} alt={"이미지가 없어요"} />
                      </a>
-                        <a href="/TicketingView1/3">
+                     <a href="/TicketingView1?concertname=2020 THE 신승훈 SHOW">
                             <img src={"http://ticketimage.interpark.com/Play/image/large/19/19011716_p.gif"} alt={"이미지가 없어요"} />
                      </a>
                         <br />
-                        <a href="/TicketingView1/4">
+                        <a href="/TicketingView1?concertname=2020 Theatre 이문세">
                             <img src={"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191030034415_19016188.gif"} alt={"이미지가 없어요"} />
                      </a>
-                        <a href="/TicketingView1/5">
+                     <a href="/TicketingView1?concertname=2020 THE 신승훈 SHOW">
                            <img src={"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191014115354_19014994.gif"} alt={"이미지가 없어요"} />
                         </a>
-                        <a href="/TicketingView1/6">
+                        <a href="/TicketingView1?concertname=2020 Theatre 이문세">
                             <img src={"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191031112636_19016101.gif"} alt={"이미지가 없어요"} />
                      </a>
                     </div>

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
-
+import queryParser from './queryParser';
 const Container = styled.div`
     align : center;
     width:640px;
@@ -88,13 +88,12 @@ class TicketingView1 extends React.Component {
           ]
         }
     }
-    Ticketing = () =>{
 
-    }
     render(){
        
        const {match} = this.props;
        const {ShowId} = match.params;
+       const concertN = queryParser.parse(window.location.search).concertname;
     return(
     <Container>
         <header>
@@ -106,28 +105,28 @@ class TicketingView1 extends React.Component {
         <fieldset  >
             <div align="center">
                 <InfoConsert>
-                        <img src={this.state.ShowInfoList[ShowId-1].img}/>
+                        <img src={this.state.ShowInfoList[0].img}/>
                         <br/>
                     
                 </InfoConsert>
                 <InfoCon2 >
-                    <Con2_P>공연 날짜</Con2_P>{this.state.ShowInfoList[ShowId-1].date}
+                    <Con2_P>공연 날짜</Con2_P>{this.state.ShowInfoList[0].date}
                 </InfoCon2><br/>
                 <InfoCon2>
-                    <Con2_P>가격</Con2_P> {this.state.ShowInfoList[ShowId-1].price} 원
+                    <Con2_P>가격</Con2_P> {this.state.ShowInfoList[0].price} 원
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>관람 시간</Con2_P> {this.state.ShowInfoList[ShowId-1].time}분
+                    <Con2_P>관람 시간</Con2_P> {this.state.ShowInfoList[0].time}분
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>장소</Con2_P> {this.state.ShowInfoList[ShowId-1].Place}
+                    <Con2_P>장소</Con2_P> {this.state.ShowInfoList[0].Place}
                 </InfoCon2>
                 <InfoCon2>
-                    <Con2_P>관람 등급</Con2_P> {this.state.ShowInfoList[ShowId-1].Rank}
+                    <Con2_P>관람 등급</Con2_P> {this.state.ShowInfoList[0].Rank}
                 </InfoCon2>
             </div>
             
-       <Button href = {"/TicketingView2/" + ShowId}>
+       <Button href = {"/TicketingView2?concertname=" + concertN}>
                  <Button2>예매하기</Button2>
             </Button>
         </fieldset>

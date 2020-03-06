@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-
+import axios from 'axios';
 const Container = styled.div`
     width : 80%;
     margin : 0 auto;
@@ -11,7 +11,6 @@ const ReservedSection = styled.section`
     & section {
         margin : 20px 0;
     }
-
     & label {
         width : 200px;
         display : inline-block;
@@ -24,7 +23,6 @@ const ReservedSection = styled.section`
         font-size : 120%;
         font-weight : bold;
     }
-
     & button {
         width : 200px; height : 55px;
         font-size : 200%;
@@ -35,13 +33,23 @@ const ReservedSection = styled.section`
         margin : 20px 50px;
     }
 `;
+const ReservationSeat = styled.p`
+    display:inline;
 
+    height : 45px;
+    font-size : 120%;
+    font-weight : bold;
+`;
 class TicketingView3 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            ReservationInfo:JSON.parse(sessionStorage.getItem('reservationInfo')),
+        }
     }
-
+    
     render() {
+        console.log(this.state.ReservationInfo);
         return (
             <Container>
                 <section>
@@ -62,7 +70,8 @@ class TicketingView3 extends Component {
                             <label>결제 금액</label><input type="text" placeholder="15,000원" readOnly />
                         </section>
                         <section>
-                            <label>예약 정보</label><input type="text" placeholder="2019년 10월 31일 19시 1열 10번" readOnly />
+                            <label>예약 정보</label>
+                            {this.state.ReservationInfo.map(R=>{console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col} &nbsp;</ReservationSeat>})} 
                         </section>
                         <section>
                             <label>결제 금액</label><input type="text" placeholder="결제 방법을 선택하세요." />

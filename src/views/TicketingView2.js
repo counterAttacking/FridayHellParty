@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
+import queryParser from './queryParser';
+import axios from 'axios';
 const Container = styled.div`
     width : 80%;
     margin : 0 auto;
@@ -106,7 +108,9 @@ class TicketingView2 extends React.Component {
             SeatColor:'#b34040',
             Seat_Reservation_False:[], //이미 예약되어있는 좌석좌표 서버에서 데이터를 얻어옴
             first:true, 
+            count:0,
             map1:[], //좌석정보
+            Reser:[],
         }
     }
     SeatClick=(row, col, SeatClick)=>{ //좌석 클릭했을때
@@ -125,24 +129,39 @@ class TicketingView2 extends React.Component {
         });
     }
     //예약 되어있는 좌석 불러오기
-    // import_Reservation_Seat = async() => { 
-    //     const request = axios({
-    //         url:'http://localhost:5000/????',
-    //         mathod:'get',
-    //       });
-    //       const {status, data} = await request;
-    //       this.setState({
-    //           Seat_Reservation_False: data
-    //       })
-         
-    //       return data;
-    //   }
+    import_Reservation_Seat = async(concertN) => { 
+        const request = axios({
+            url:'http://localhost:5000/reservation/'+concertN,
+            mathod:'get',
+          });
+          const {status, data} = await request;
+          this.setState({
+              Seat_Reservation_False: data
+          })
+      }
+
+      ReservationButtonClick= ()=>{
+        for(let i = 0;i<10;i++){
+            for(let j = 0;j<20;j++){
+                if(this.state.map1[i][j].SeatClick){
+                    console.log(String.fromCharCode(i+65));
+                    this.state.Reser.push({
+                        row:String.fromCharCode(i+65),
+                        col:j,
+                    })
+                }
+            }
+        }
+        sessionStorage.setItem('reservationInfo', JSON.stringify(this.state.Reser));
+        console.log(this.state.Reser);
+      }
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
-        
+        const concertN = queryParser.parse(window.location.search).concertname;
         if(this.state.first){
-           // this.import_Reservation_Seat(); //예약되있는 좌석 불러오기 아직 DB가 없음
+            this.import_Reservation_Seat(concertN); //예약되있는 좌석 불러오기
+            
             for(let i =0;i<10;i++){
                 var col2 = [];
                 for(let j=0;j<20;j++){
@@ -166,26 +185,37 @@ class TicketingView2 extends React.Component {
         }
 
         // DB에서 가져온 예약되어있는 자리 색 바꾸기
-        // for(let i =0;i<this.state.Seat_Reservation_False.length;i++){
-        //     var row = (this.state.Seat_Reservation_False[i].row.charCodeAt(0))-65;
-        //     var col = parseInt(this.state.Seat_Reservation_False[i].col);
-        //     this.state.map1[row][col].Seat = false;
-        //     this.state.map1[row][col].backG={background : "url('https://jihunsg.github.io/PROJECT/png/곱하기.png')",
-        //         backgroundSize:'30px',
-        //         //position:'static',
-        //         display:'inline-block',
-        //         padding: '5px',
-        //         margin:'5px',
-        //         cursor:'pointer',
-        //         width: '20px',
-        //         height: '20px'}
-        // }
+        for(let i =0;i<this.state.Seat_Reservation_False.length;i++){
+            // var row = (this.state.Seat_Reservation_False[i].row.charCodeAt(0))-65;
+            var row = parseInt(this.state.Seat_Reservation_False[i].row);
+            var col = parseInt(this.state.Seat_Reservation_False[i].col);
+            this.state.map1[row][col].Seat = false;
+            this.state.map1[row][col].backG={background : "url('https://jihunsg.github.io/PROJECT/png/곱하기.png')",
+                backgroundSize:'30px',
+                //position:'static',
+                display:'inline-block',
+                padding: '5px',
+                margin:'5px',
+                cursor:'pointer',
+                width: '20px',
+                height: '20px'}
+        }
 
        this.Seat=(row, col, SeatClick, Seat)=>{ 
            if(Seat){ //예약 가능한 자리인지 확인
                const c1 = !SeatClick ? '#00ff00': '#b34040';
                this.state.SeatColor = c1;
                this.SeatClick(row,col,SeatClick);
+               if(!SeatClick){
+                   this.setState({
+                       count: this.state.count+1,
+                    });
+                }
+                else{
+                    this.setState({
+                        count: this.state.count-1,
+                     });
+                }
             }
             else{
                 alert("이미 예약된 좌석입니다.");
@@ -195,7 +225,7 @@ class TicketingView2 extends React.Component {
             <Container>
                 <div align='center'>
                 <ImgDiv>
-                    <img src={this.state.ShowInfoList[ShowId-1].img} alt={"No"} align="center" />
+                    <img src={this.state.ShowInfoList[2].img} alt={"No"} align="center" />
                     <br />
                     </ImgDiv>
                 
@@ -214,8 +244,9 @@ class TicketingView2 extends React.Component {
 
                     <CenterDiv><NavLi>좌석선택</NavLi><br /></CenterDiv>
                     <NextPageDiv>
+
                     <Link1 href="/TicketingView3">
-                        <NextPage type="button" value="예매하기" />
+                        <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
                     </Link1>
                 </NextPageDiv>
                 </div>

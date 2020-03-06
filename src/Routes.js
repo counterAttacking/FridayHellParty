@@ -40,13 +40,13 @@ const routes = [
     },
     {
         id: 'ticket1',
-        path: '/TicketingView1/:ShowId',
+        path: '/TicketingView1',
         exact: true,
         component: TicketingView1,
     },
     {
         id: 'ticket2',
-        path: '/TicketingView2/:ShowId',
+        path: '/TicketingView2',
         exact: true,
         component: TicketingView2,
     },
