@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 import queryParser from './queryParser';
+import * as axios from 'axios';
+
 const Container = styled.div`
     align : center;
     width:640px;
@@ -70,70 +72,69 @@ const Button2 = styled.div`
 
 
 class TicketingView1 extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-          ShowInfoList:[
-              {id:1, img:"http://ticketimage.interpark.com/Play/image/large/19/19016399_p.gif", date:"2019-10-30-19:00",
-            price:15000, time:70, Place:"서울 종합운동장", Rank:"12세 이상 관람가" },
-            {id:2, img:"http://ticketimage.interpark.com/Play/image/large/19/19011808_p.gif", date:"2020-01-05-16:00",
-            price:25000, time:90, Place:"서울 종합운동장", Rank:"전체이용가" },
-            {id:3, img:"http://ticketimage.interpark.com/Play/image/large/19/19011716_p.gif", date:"2020-01-10-20:00",
-            price:35000, time:120, Place:"서울 종합운동장", Rank:"15세 이용가" },
-            {id:4, img:"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191030034415_19016188.gif", date:"2020-01-01-17:00",
-            price:20000, time:100, Place:"서울 종합운동장", Rank:"12세 이용가" },
-            {id:5, img:"http://ticketimage.interpark.com/TCMS3.0/CO/HOT/1910/191014115354_19014994.gif", date:"2020-01-10-20:00",
-            price:35000, time:150, Place:"서울 종합운동장", Rank:"15세 이용가" },
-            
-          ]
+            concert: [],
         }
     }
 
-    render(){
-       
-       const {match} = this.props;
-       const {ShowId} = match.params;
-       const concertN = queryParser.parse(window.location.search).concertname;
-    return(
-    <Container>
-        <header>
-            <InforA href="/"><Logo>LOGO</Logo></InforA>
-            <InforD>
-                <InforA href="/LoginView">내정보 </InforA>&nbsp;<InforA href="/MemberRegisterView">예약확인</InforA>
-            </InforD>
-        </header>
-        <fieldset  >
-            <div align="center">
-                <InfoConsert>
-                        <img src={this.state.ShowInfoList[0].img}/>
-                        <br/>
-                    
-                </InfoConsert>
-                <InfoCon2 >
-                    <Con2_P>공연 날짜</Con2_P>{this.state.ShowInfoList[0].date}
-                </InfoCon2><br/>
-                <InfoCon2>
-                    <Con2_P>가격</Con2_P> {this.state.ShowInfoList[0].price} 원
-                </InfoCon2>
-                <InfoCon2>
-                    <Con2_P>관람 시간</Con2_P> {this.state.ShowInfoList[0].time}분
-                </InfoCon2>
-                <InfoCon2>
-                    <Con2_P>장소</Con2_P> {this.state.ShowInfoList[0].Place}
-                </InfoCon2>
-                <InfoCon2>
-                    <Con2_P>관람 등급</Con2_P> {this.state.ShowInfoList[0].Rank}
-                </InfoCon2>
-            </div>
-            
-       <Button href = {"/TicketingView2?concertname=" + concertN}>
-                 <Button2>예매하기</Button2>
-            </Button>
-        </fieldset>
+    componentWillMount = async () => {
+        const { match } = this.props;
+        const request = axios({
+            url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
+            method: 'get',
+        });
+        const { status, data } = await request;
+        this.setState({
+            concert:data,
+        });
+    }
 
-        {this.props.List}
-    </Container>
-    );}
+    render() {
+        const { match } = this.props;
+        const { ShowId } = match.params;
+        const { concert } = this.state;
+        return (
+            <Container>
+                <header>
+                    <InforA href="/"><Logo>LOGO</Logo></InforA>
+                    <InforD>
+                        <InforA href="/LoginView">내정보 </InforA>&nbsp;<InforA href="/MemberRegisterView">예약확인</InforA>
+                    </InforD>
+                </header>
+                <fieldset>
+                    <div align="center">
+                        <InfoConsert>
+                            <img src={concert.imgUrl} width="100%" />
+                        </InfoConsert>
+                        <InfoCon2 >
+                            <Con2_P>공연 이름</Con2_P>{concert.name}
+                        </InfoCon2>
+                        <InfoCon2 >
+                            <Con2_P>공연 날짜</Con2_P>{concert.date}
+                        </InfoCon2>
+                        <InfoCon2>
+                            <Con2_P>가격</Con2_P> {concert.price} 원
+                        </InfoCon2>
+                        <InfoCon2>
+                            <Con2_P>관람 시간</Con2_P> {concert.time}분
+                        </InfoCon2>
+                        <InfoCon2>
+                            <Con2_P>장소</Con2_P> {concert.concertPlace}
+                        </InfoCon2>
+                        <InfoCon2>
+                            <Con2_P>관람 등급</Con2_P> {concert.rank}
+                        </InfoCon2>
+                    </div>
+                    <Button href={"/TicketingView2/" + ShowId}>
+                        <Button2>예매하기</Button2>
+                    </Button>
+                </fieldset>
+                {this.props.List}
+            </Container>
+        );
+    }
 }
 
 export default TicketingView1;
