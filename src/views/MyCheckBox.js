@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 
 class MyCheckBox extends Component {
 
@@ -8,9 +8,9 @@ class MyCheckBox extends Component {
 
     handleChange = () => {
         if (this.state.checked)
-            this.setState({checked: false});
+            this.setState({ checked: false });
         else
-            this.setState({checked: true});
+            this.setState({ checked: true });
     };
 
     render() {

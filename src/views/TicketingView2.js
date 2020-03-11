@@ -91,24 +91,24 @@ const RL = styled.p`
     height: 30px;
     background-color: '#404fb3;'
 `;
-  
+
 
 class TicketingView2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             concert: [],
-            SeatColor:'#b34040',
-            Seat_Reservation_False:[], //이미 예약되어있는 좌석좌표 서버에서 데이터를 얻어옴
-            first:true, 
-            count:0,
-            map1:[], //좌석정보
-            Reser:[],
-            concertN:[],
+            SeatColor: '#b34040',
+            Seat_Reservation_False: [], //이미 예약되어있는 좌석좌표 서버에서 데이터를 얻어옴
+            first: true,
+            count: 0,
+            map1: [], //좌석정보
+            Reser: [],
+            concertN: [],
             totPrice: 0,
         }
     }
-    
+
     componentWillMount = async () => { //데이터 베이스
         const { match } = this.props;
         const request = axios({
@@ -122,42 +122,44 @@ class TicketingView2 extends React.Component {
         });
         console.log(this.state.concert);
     }
-    
-    SeatClick=(row, col, SeatClick)=>{ //좌석 클릭했을때
+
+    SeatClick = (row, col, SeatClick) => { //좌석 클릭했을때
         this.setState(this.state.map1[row][col] = {
             id: col,
-            backG:{background : this.state.SeatColor, //색 바꿈
+            backG: {
+                background: this.state.SeatColor, //색 바꿈
                 //position:'static',
-                display:'inline-block',
+                display: 'inline-block',
                 padding: '5px',
-                margin:'5px',
-                cursor:'pointer',
+                margin: '5px',
+                cursor: 'pointer',
                 width: '20px',
-                height: '20px'},
-            Seat:this.state.map1[row][col].Seat, 
-            SeatClick: !SeatClick, 
+                height: '20px'
+            },
+            Seat: this.state.map1[row][col].Seat,
+            SeatClick: !SeatClick,
         });
     }
     //예약 되어있는 좌석 불러오기
-    import_Reservation_Seat = async(concertN) => { 
+    import_Reservation_Seat = async (concertN) => {
         const request = axios({
-            url:'http://localhost:5000/reservation/'+concertN,
-            mathod:'get',
-          });
-          const {status, data} = await request;
-          this.setState({
-              Seat_Reservation_False: data
-          })
-      }
+            url: 'http://localhost:5000/reservation/' + concertN,
+            mathod: 'get',
+        });
+        const { status, data } = await request;
+        this.setState({
+            Seat_Reservation_False: data
+        })
+    }
 
-    ReservationButtonClick= ()=>{
-        for(let i = 0;i<10;i++){
-            for(let j = 0;j<20;j++){
-                if(this.state.map1[i][j].SeatClick){
-                    console.log(String.fromCharCode(i+65));
+    ReservationButtonClick = () => {
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 20; j++) {
+                if (this.state.map1[i][j].SeatClick) {
+                    console.log(String.fromCharCode(i + 65));
                     this.state.Reser.push({
-                        row:String.fromCharCode(i+65),
-                        col:j,
+                        row: String.fromCharCode(i + 65),
+                        col: j,
                     })
                 }
             }
@@ -166,12 +168,12 @@ class TicketingView2 extends React.Component {
         console.log(this.state.Reser);
     }
 
-    import_Concert = async(id) => { 
-    const request = axios({
-        url:'http://localhost:5000/getConcert/'+id,
-        mathod:'get',
+    import_Concert = async (id) => {
+        const request = axios({
+            url: 'http://localhost:5000/getConcert/' + id,
+            mathod: 'get',
         });
-        const {status, data} = await request;
+        const { status, data } = await request;
         this.setState({
             concertN: data.name
         })
@@ -183,25 +185,29 @@ class TicketingView2 extends React.Component {
         const { ShowId } = match.params;
         const { concert } = this.state;
 
-        if(this.state.first){
+        if (this.state.first) {
             this.import_Concert(ShowId);
-             //예약되있는 좌석 불러오기
-             this.componentWillMount();
+            //예약되있는 좌석 불러오기
+            this.componentWillMount();
             console.log(this.state.concertN);
-            for(let i =0;i<10;i++){
+            for (let i = 0; i < 10; i++) {
                 var col2 = [];
-                for(let j=0;j<20;j++){
-                    col2.push({id:j, //id: col
-                    backG:{background:'#b34040', 
-                   // position:'static',
-                    display:'inline-block',
-                    padding: '5px',
-                    margin:'5px',
-                    cursor:'pointer',
-                    width: '20px',
-                    height: '20px'},
-                    Seat:true,  //에약가능한지 확인
-                    SeatClick:false }); //선택되있는지 확인
+                for (let j = 0; j < 20; j++) {
+                    col2.push({
+                        id: j, //id: col
+                        backG: {
+                            background: '#b34040',
+                            // position:'static',
+                            display: 'inline-block',
+                            padding: '5px',
+                            margin: '5px',
+                            cursor: 'pointer',
+                            width: '20px',
+                            height: '20px'
+                        },
+                        Seat: true,  //에약가능한지 확인
+                        SeatClick: false
+                    }); //선택되있는지 확인
                 }
                 this.state.map1.push(col2);
             }
@@ -211,42 +217,44 @@ class TicketingView2 extends React.Component {
         }
 
         // DB에서 가져온 예약되어있는 자리 색 바꾸기
-        for(let i =0;i<this.state.Seat_Reservation_False.length;i++){
+        for (let i = 0; i < this.state.Seat_Reservation_False.length; i++) {
             // var row = (this.state.Seat_Reservation_False[i].row.charCodeAt(0))-65;
             var row = parseInt(this.state.Seat_Reservation_False[i].row);
             var col = parseInt(this.state.Seat_Reservation_False[i].col);
             this.state.map1[row][col].Seat = false;
-            this.state.map1[row][col].backG={background : "url('https://jihunsg.github.io/PROJECT/png/곱하기.png')",
-                backgroundSize:'30px',
+            this.state.map1[row][col].backG = {
+                background: "url('https://jihunsg.github.io/PROJECT/png/곱하기.png')",
+                backgroundSize: '30px',
                 //position:'static',
-                display:'inline-block',
+                display: 'inline-block',
                 padding: '5px',
-                margin:'5px',
-                cursor:'pointer',
+                margin: '5px',
+                cursor: 'pointer',
                 width: '20px',
-                height: '20px'}
+                height: '20px'
+            }
         }
 
-       this.Seat=(row, col, SeatClick, Seat)=>{ 
-           if(Seat){ //예약 가능한 자리인지 확인
-               const c1 = !SeatClick ? '#00ff00': '#b34040';
-               this.state.SeatColor = c1;
-               this.SeatClick(row,col,SeatClick);
-               if(!SeatClick){
-                   this.setState({
-                       count: this.state.count+1,
+        this.Seat = (row, col, SeatClick, Seat) => {
+            if (Seat) { //예약 가능한 자리인지 확인
+                const c1 = !SeatClick ? '#00ff00' : '#b34040';
+                this.state.SeatColor = c1;
+                this.SeatClick(row, col, SeatClick);
+                if (!SeatClick) {
+                    this.setState({
+                        count: this.state.count + 1,
                     });
                 }
-                else{
+                else {
                     this.setState({
-                        count: this.state.count-1,
-                     });
+                        count: this.state.count - 1,
+                    });
                 }
             }
-            else{
+            else {
                 alert("이미 예약된 좌석입니다.");
             }
-       }
+        }
         return (
             <Container>
                 <div align='center'>
@@ -266,23 +274,23 @@ class TicketingView2 extends React.Component {
                     <InfoCon2>
                         <Con2_P>가격 (1인 기준) :</Con2_P> {concert.price} 원
                     </InfoCon2>
-                    
+
                     <DDD>
-                        <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>B</RL>{this.state.map1[1].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(1, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>C</RL>{this.state.map1[2].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(2, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>D</RL>{this.state.map1[3].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(3, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>E</RL>{this.state.map1[4].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(4, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>F</RL>{this.state.map1[5].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(5, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>G</RL>{this.state.map1[6].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(6, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>H</RL>{this.state.map1[7].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(7, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>I</RL>{this.state.map1[8].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(8, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                        <RL>J</RL>{this.state.map1[9].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(9, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>A</RL>{this.state.map1[0].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(0, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>B</RL>{this.state.map1[1].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(1, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>C</RL>{this.state.map1[2].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(2, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>D</RL>{this.state.map1[3].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(3, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>E</RL>{this.state.map1[4].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(4, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>F</RL>{this.state.map1[5].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(5, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>G</RL>{this.state.map1[6].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(6, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>H</RL>{this.state.map1[7].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(7, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>I</RL>{this.state.map1[8].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(8, s.id, s.SeatClick, s.Seat) }} /> })}<br />
+                        <RL>J</RL>{this.state.map1[9].map((s) => { return <div style={s.backG} onClick={() => { this.Seat(9, s.id, s.SeatClick, s.Seat) }} /> })}<br />
                     </DDD>
-                    
+
                     <NextPageDiv>
-                        <Link1 href={"/Ticketing3/"+ShowId}>
-                            <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
+                        <Link1 href={"/Ticketing3/" + ShowId}>
+                            <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick} />
                         </Link1>
                     </NextPageDiv>
                 </div>

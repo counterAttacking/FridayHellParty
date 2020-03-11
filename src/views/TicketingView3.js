@@ -45,11 +45,11 @@ const ReservationSeat = styled.p`
 class TicketingView3 extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            ReservationInfo:JSON.parse(sessionStorage.getItem('reservationInfo')),
-            concert:[],
-            userId:JSON.parse(sessionStorage.getItem('plainUserId')),
-            userData:[],
+        this.state = {
+            ReservationInfo: JSON.parse(sessionStorage.getItem('reservationInfo')),
+            concert: [],
+            userId: JSON.parse(sessionStorage.getItem('plainUserId')),
+            userData: [],
         }
     }
 
@@ -58,7 +58,7 @@ class TicketingView3 extends Component {
         this.getUserData();
     }
 
-    getConcertData=async()=>{
+    getConcertData = async () => {
         const { match } = this.props;
         const request = axios({
             url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
@@ -66,33 +66,33 @@ class TicketingView3 extends Component {
         });
         const { status, data } = await request;
         this.setState({
-            concert:data,
+            concert: data,
         });
     }
 
-    getUserData=async()=>{
-        const request=axios({
-            url:'http://localhost:5000/userinfo/'+this.state.userId,
-            method:'get',
+    getUserData = async () => {
+        const request = axios({
+            url: 'http://localhost:5000/userinfo/' + this.state.userId,
+            method: 'get',
         });
-        const {status,data}=await request;
+        const { status, data } = await request;
         this.setState({
-            userData:data,
+            userData: data,
         });
     }
 
-    okBtnEventHandler=(event)=>{
+    okBtnEventHandler = (event) => {
         sessionStorage.removeItem('reservationInfo');
         alert('예매가 완료되었습니다.');
         window.location.replace('/');
     }
 
-    cancelBtnEventHandler=(event)=>{
+    cancelBtnEventHandler = (event) => {
         sessionStorage.removeItem('reservationInfo');
         alert('예매가 취소되었습니다.');
         window.location.replace('/');
     }
-    
+
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
@@ -119,11 +119,11 @@ class TicketingView3 extends Component {
                         </section>
                         <section>
                             <label>결제 금액</label>
-                            <label>{parseInt(concert.price)*this.state.ReservationInfo.length} 원</label>
+                            <label>{parseInt(concert.price) * this.state.ReservationInfo.length} 원</label>
                         </section>
                         <section>
                             <label>예약 정보</label>
-                            {this.state.ReservationInfo.map(R=>{console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col} &nbsp;</ReservationSeat>})} 
+                            {this.state.ReservationInfo.map(R => { console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col} &nbsp;</ReservationSeat> })}
                         </section>
                         <section>
                             <label>결제 방법</label>

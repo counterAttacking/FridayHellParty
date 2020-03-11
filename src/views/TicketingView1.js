@@ -87,7 +87,7 @@ class TicketingView1 extends React.Component {
         });
         const { status, data } = await request;
         this.setState({
-            concert:data,
+            concert: data,
         });
     }
 

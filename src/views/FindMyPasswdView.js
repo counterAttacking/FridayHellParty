@@ -1,4 +1,4 @@
-﻿import React, {Component} from 'react';
+﻿import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -56,60 +56,60 @@ const InforP = styled.p` display:inline-block`;
 
 class FindMyPasswdView extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-          ID : null,
-          Name: null,
-          PhoneNum: null,
-          URL : ""
+            ID: null,
+            Name: null,
+            PhoneNum: null,
+            URL: ""
         }
     }
-    Information =()=>{
-        if(this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null){
-            alert("아이디 : "+this.state.ID+"\n이름 : "+this.state.Name+"\n전화번호 : "+this.state.PhoneNum);
+    Information = () => {
+        if (this.state.ID != null && this.state.Name != null && this.state.PhoneNum != null) {
+            alert("아이디 : " + this.state.ID + "\n이름 : " + this.state.Name + "\n전화번호 : " + this.state.PhoneNum);
             window.location.replace("http://localhost:3000/LoginView");
         }
-        else{
+        else {
             alert("모든 항목을 입력해 주세요");
         }
         return;
     }
-    InputID = (e) =>{
+    InputID = (e) => {
         this.setState({
             ID: e.target.value,
         });
     }
-    InputName = (e) =>{
+    InputName = (e) => {
         this.setState({
             Name: e.target.value,
         });
     }
-    InputPhone = (e) =>{
+    InputPhone = (e) => {
         this.setState({
             PhoneNum: e.target.value,
         });
     }
-    render(){
-        return(
+    render() {
+        return (
             <Container>
                 <InforA href="/"><Logo>LOGO</Logo></InforA>
-                    <div align="center">
-                        
+                <div align="center">
+
                     <IDiv>
-                     <InforH3>비밀번호 찾기</InforH3>
+                        <InforH3>비밀번호 찾기</InforH3>
                         <InforD>
                             <InforP><InforA href="/Login">로그인 </InforA>&nbsp;<InforA href="/MemberRegister">회원가입</InforA></InforP>
                         </InforD>
                         <Minput type="text" placeholder="아이디 " onChange={this.InputID} /><br /><br />
-                        <Minput type="text" placeholder="이름 " onChange={this.InputName}/><br /><br />
-                        <Minput type="text" placeholder="휴대폰 번호 -없이" onChange={this.InputPhone}/> <br /><br />
+                        <Minput type="text" placeholder="이름 " onChange={this.InputName} /><br /><br />
+                        <Minput type="text" placeholder="휴대폰 번호 -없이" onChange={this.InputPhone} /> <br /><br />
                     </IDiv> <br /><br />
                     <Minput2 type="submit" value="확인" onClick={this.Information} /><br /><br />
 
-                    </div>
-             </Container>
-    );
+                </div>
+            </Container>
+        );
     }
 }
 

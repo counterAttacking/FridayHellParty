@@ -14,7 +14,7 @@ class Seat extends React.Component {
     render() {
         const items = [];
         for (let i = 0; i < 1008; i++) {
-            items.push(<MyCheckBox/>);
+            items.push(<MyCheckBox />);
         }
         return (
             <ul>

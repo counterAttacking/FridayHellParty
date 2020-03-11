@@ -10,11 +10,11 @@ import FindMyPasswdView from './views/FindMyPasswdView';
 // import TicketReservation from './views/TicketReservation';
 
 const routes = [
-{
-    id: 'main',
-    path: '/',
-    exact: true,
-    component: MainView,
+    {
+        id: 'main',
+        path: '/',
+        exact: true,
+        component: MainView,
     },
     {
         id: 'memberRegister',
