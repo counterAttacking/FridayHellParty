@@ -253,6 +253,10 @@ class TicketingView2 extends React.Component {
                     <ImgDiv>
                         <img src={concert.imgUrl} width={"100%"} align="center" />
                     </ImgDiv>
+                    <CenterDiv>
+                        <NavLi><h3>좌석선택</h3></NavLi>
+                    </CenterDiv>
+                    <br />
                     <InfoCon2>
                         <Con2_P>공연 이름 :</Con2_P>{concert.name}
                     </InfoCon2>
@@ -262,6 +266,7 @@ class TicketingView2 extends React.Component {
                     <InfoCon2>
                         <Con2_P>가격 (1인 기준) :</Con2_P> {concert.price} 원
                     </InfoCon2>
+                    
                     <DDD>
                         <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
                         <RL>B</RL>{this.state.map1[1].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(1, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
@@ -274,8 +279,7 @@ class TicketingView2 extends React.Component {
                         <RL>I</RL>{this.state.map1[8].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(8, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
                         <RL>J</RL>{this.state.map1[9].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(9, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
                     </DDD>
-
-                    <CenterDiv><NavLi>좌석선택</NavLi><br /></CenterDiv>
+                    
                     <NextPageDiv>
                         <Link1 href={"/Ticketing3/"+ShowId}>
                             <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
