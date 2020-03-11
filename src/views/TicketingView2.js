@@ -150,7 +150,7 @@ class TicketingView2 extends React.Component {
           })
       }
 
-      ReservationButtonClick= ()=>{
+    ReservationButtonClick= ()=>{
         for(let i = 0;i<10;i++){
             for(let j = 0;j<20;j++){
                 if(this.state.map1[i][j].SeatClick){
@@ -164,24 +164,25 @@ class TicketingView2 extends React.Component {
         }
         sessionStorage.setItem('reservationInfo', JSON.stringify(this.state.Reser));
         console.log(this.state.Reser);
-      }
-      import_Concert = async(id) => { 
-        const request = axios({
-            url:'http://localhost:5000/getConcert/'+id,
-            mathod:'get',
-          });
-          const {status, data} = await request;
-          this.setState({
-              concertN: data.name
-          })
-          this.import_Reservation_Seat(this.state.concertN);
-      }
+    }
+
+    import_Concert = async(id) => { 
+    const request = axios({
+        url:'http://localhost:5000/getConcert/'+id,
+        mathod:'get',
+        });
+        const {status, data} = await request;
+        this.setState({
+            concertN: data.name
+        })
+        this.import_Reservation_Seat(this.state.concertN);
+    }
+
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
         const { concert } = this.state;
 
-        
         if(this.state.first){
             this.import_Concert(ShowId);
              //예약되있는 좌석 불러오기
@@ -249,44 +250,38 @@ class TicketingView2 extends React.Component {
         return (
             <Container>
                 <div align='center'>
-                <ImgDiv>
+                    <ImgDiv>
                         <img src={concert.imgUrl} width={"100%"} align="center" />
-                </ImgDiv>
-                <InfoCon2>
-              <Con2_P>공연 이름 :</Con2_P>{concert.name}
-                </InfoCon2>
-                <InfoCon2 >
-               <Con2_P>공연 날짜 :</Con2_P> {concert.date}
-             </InfoCon2>
-             <InfoCon2>
-             <Con2_P>가격 (1인 기준) :</Con2_P> {concert.price} 원
-             </InfoCon2>
-                
-
-                
+                    </ImgDiv>
+                    <InfoCon2>
+                        <Con2_P>공연 이름 :</Con2_P>{concert.name}
+                    </InfoCon2>
+                    <InfoCon2 >
+                        <Con2_P>공연 날짜 :</Con2_P> {concert.date}
+                    </InfoCon2>
+                    <InfoCon2>
+                        <Con2_P>가격 (1인 기준) :</Con2_P> {concert.price} 원
+                    </InfoCon2>
                     <DDD>
-                    <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>B</RL>{this.state.map1[1].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(1, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>C</RL>{this.state.map1[2].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(2, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>D</RL>{this.state.map1[3].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(3, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>E</RL>{this.state.map1[4].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(4, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>F</RL>{this.state.map1[5].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(5, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>G</RL>{this.state.map1[6].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(6, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>H</RL>{this.state.map1[7].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(7, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>I</RL>{this.state.map1[8].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(8, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
-                    <RL>J</RL>{this.state.map1[9].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(9, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>A</RL>{this.state.map1[0].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(0, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>B</RL>{this.state.map1[1].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(1, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>C</RL>{this.state.map1[2].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(2, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>D</RL>{this.state.map1[3].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(3, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>E</RL>{this.state.map1[4].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(4, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>F</RL>{this.state.map1[5].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(5, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>G</RL>{this.state.map1[6].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(6, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>H</RL>{this.state.map1[7].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(7, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>I</RL>{this.state.map1[8].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(8, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
+                        <RL>J</RL>{this.state.map1[9].map((s) => {return <div  style={s.backG} onClick={()=>{this.Seat(9, s.id, s.SeatClick, s.Seat)}}/>})}<br/>
                     </DDD>
 
                     <CenterDiv><NavLi>좌석선택</NavLi><br /></CenterDiv>
                     <NextPageDiv>
-
-                    <Link1 href="/Ticketing3">
-                        <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
-                    </Link1>
-                </NextPageDiv>
+                        <Link1 href={"/Ticketing3/"+ShowId}>
+                            <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
+                        </Link1>
+                    </NextPageDiv>
                 </div>
-                
-                
             </Container>
         )
     }

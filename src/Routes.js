@@ -54,7 +54,7 @@ const routes = [
     },
     {
         id: 'ticket3',
-        path: '/Ticketing3',
+        path: '/Ticketing3/:ShowId',
         exact: true,
         component: TicketingView3,
     },

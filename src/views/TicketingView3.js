@@ -49,6 +49,8 @@ class TicketingView3 extends Component {
     }
     
     render() {
+        const { match } = this.props;
+        const { ShowId } = match.params;
         console.log(this.state.ReservationInfo);
         return (
             <Container>
