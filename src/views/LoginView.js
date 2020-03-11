@@ -86,9 +86,9 @@ class LoginView extends React.Component {
                             <LoginButton>로그인</LoginButton>
                         </article>
                         <article>
-                            <LinkSpan><Link href="/FindMyIdView">아이디찾기</Link></LinkSpan>
-                            <LinkSpan><Link href="/FindMyPasswdView">비밀번호찾기</Link></LinkSpan>
-                            <LinkSpan><Link href="/MemberRegisterView">회원가입</Link></LinkSpan>
+                            <LinkSpan><Link href="/FindMyId">아이디찾기</Link></LinkSpan>
+                            <LinkSpan><Link href="/FindMyPasswd">비밀번호찾기</Link></LinkSpan>
+                            <LinkSpan><Link href="/MemberRegister">회원가입</Link></LinkSpan>
                         </article>
                     </LoginBox>
                 </section>

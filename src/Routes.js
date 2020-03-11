@@ -7,7 +7,7 @@ import TicketingView3 from './views/TicketingView3';
 import FindMyIdView from './views/FindMyIdView';
 import FindMyPasswdView from './views/FindMyPasswdView';
 
-import TicketReservation from './views/TicketReservation';
+// import TicketReservation from './views/TicketReservation';
 
 const routes = [
 {
@@ -18,52 +18,52 @@ const routes = [
     },
     {
         id: 'memberRegister',
-        path: '/MemberRegisterView',
+        path: '/MemberRegister',
         exact: true,
         component: MemberRegisterView,
     },
     {
         id: 'login',
-        path: '/LoginView',
+        path: '/Login',
         exact: true,
         component: LoginView,
     },
     {
         id: 'findMyId',
-        path: '/FindMyIdView',
+        path: '/FindMyId',
         exact: true,
         component: FindMyIdView,
     },
     {
         id: 'findMyPasswd',
-        path: '/FindMyPasswdView',
+        path: '/FindMyPasswd',
         exact: true,
         component: FindMyPasswdView,
     },
     {
         id: 'ticket1',
-        path: '/TicketingView1/:ShowId',
+        path: '/Ticketing1/:ShowId',
         exact: true,
         component: TicketingView1,
     },
     {
         id: 'ticket2',
-        path: '/TicketingView2/:ShowId',
+        path: '/Ticketing2/:ShowId',
         exact: true,
         component: TicketingView2,
     },
     {
         id: 'ticket3',
-        path: '/TicketingView3',
+        path: '/Ticketing3',
         exact: true,
         component: TicketingView3,
     },
-    {
+    /*{
         id: 'ticketReservation',
         path: '/ticketinfo',
         exact: true,
         component: TicketReservation,
-    },
+    },*/
 ];
 
 export default routes;

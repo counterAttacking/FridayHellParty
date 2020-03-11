@@ -99,7 +99,7 @@ class FindMyPasswdView extends React.Component {
                     <IDiv>
                      <InforH3>비밀번호 찾기</InforH3>
                         <InforD>
-                            <InforP><InforA href="/LoginView">로그인 </InforA>&nbsp;<InforA href="/MemberRegisterView">회원가입</InforA></InforP>
+                            <InforP><InforA href="/Login">로그인 </InforA>&nbsp;<InforA href="/MemberRegister">회원가입</InforA></InforP>
                         </InforD>
                         <Minput type="text" placeholder="아이디 " onChange={this.InputID} /><br /><br />
                         <Minput type="text" placeholder="이름 " onChange={this.InputName}/><br /><br />

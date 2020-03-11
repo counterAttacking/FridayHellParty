@@ -192,9 +192,9 @@ class MainView extends React.Component {
             <LoginButton onClick={this.login}>로그인</LoginButton>
             
             <NavUl>
-                <NavLi><Link1 href="/FindMyIdView">아이디 찾기</Link1></NavLi>
-                <NavLi><Link1 href="/FindMyPasswdView">비밀번호 찾기</Link1></NavLi>
-                <NavLi><Link1 href="/MemberRegisterView">회원가입</Link1></NavLi>
+                <NavLi><Link1 href="/FindMyId">아이디 찾기</Link1></NavLi>
+                <NavLi><Link1 href="/FindMyPasswd">비밀번호 찾기</Link1></NavLi>
+                <NavLi><Link1 href="/MemberRegister">회원가입</Link1></NavLi>
             </NavUl>
           </div>)
     }
@@ -251,32 +251,32 @@ export default function AuthExample () {
             </header>
             <section>
                 <section>
-                    <a href="/TicketingView1/1">
+                    <a href="/Ticketing1/1">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/201912/MainVisual_578b59f7-27db-4459-84a7-c6548d557581.jpg"} width="100%" />
                     </a>
                 </section>
                 <section>
-                    <a href="/TicketingView1/2">
+                    <a href="/Ticketing1/2">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/202001/MainVisual_a302e2f2-0551-4bd8-be19-a393bafbc5ef.jpg"} width="100%" />
                     </a>
                 </section>
                 <section>
-                    <a href="/TicketingView1/3">
+                    <a href="/Ticketing1/3">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/202002/MainVisual_8a0e0652-f863-4b83-8ea0-774bad09882a.jpg"} width="100%" />
                         </a>
                 </section>
                 <section>
-                    <a href="/TicketingView1/4">
+                    <a href="/Ticketing1/4">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/202002/MainVisual_1df1da58-70b9-45e4-8754-8c69a5420062.jpg"} width="100%" />
                     </a>
                 </section>
                 <section>
-                    <a href="/TicketingView1/5">
+                    <a href="/Ticketing1/5">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/202002/MainVisual_61d4e856-8af1-48f2-a04a-f43bcfd412e2.jpg"} width="100%" />
                     </a>
                 </section>
                 <section>
-                    <a href="/TicketingView1/6">
+                    <a href="/Ticketing1/6">
                         <img src={"http://ticketimage.interpark.com/TCMS4/Main/201909/MainVisual_a8d08402-654d-4ede-b637-c597d1512dc5.jpg"} width="100%" />
                     </a>
                 </section>

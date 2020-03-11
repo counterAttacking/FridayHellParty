@@ -100,7 +100,7 @@ class TicketingView1 extends React.Component {
                 <header>
                     <InforA href="/"><Logo>LOGO</Logo></InforA>
                     <InforD>
-                        <InforA href="/LoginView">내정보 </InforA>&nbsp;<InforA href="/MemberRegisterView">예약확인</InforA>
+                        <InforA href="/Login">내정보 </InforA>&nbsp;<InforA href="/MemberRegister">예약확인</InforA>
                     </InforD>
                 </header>
                 <fieldset>
@@ -127,7 +127,7 @@ class TicketingView1 extends React.Component {
                             <Con2_P>관람 등급</Con2_P> {concert.rank}
                         </InfoCon2>
                     </div>
-                    <Button href={"/TicketingView2/" + ShowId}>
+                    <Button href={"/Ticketing2/" + ShowId}>
                         <Button2>예매하기</Button2>
                     </Button>
                 </fieldset>

@@ -99,9 +99,9 @@ class FindMyIdView extends Component {
                     <FindId>
                         <article>
                             <ContentHeader><h3>아이디 찾기</h3></ContentHeader>
-                            <LinkSpan><Link href="/FindMyPasswdView">로그인</Link></LinkSpan>
-                            <LinkSpan><Link href="/FindMyPasswdView">비밀번호 찾기</Link></LinkSpan>
-                            <LinkSpan><Link href="/MemberRegisterView">회원가입</Link></LinkSpan>
+                            <LinkSpan><Link href="/FindMyPasswd">로그인</Link></LinkSpan>
+                            <LinkSpan><Link href="/FindMyPasswd">비밀번호 찾기</Link></LinkSpan>
+                            <LinkSpan><Link href="/MemberRegister">회원가입</Link></LinkSpan>
                         </article>
                         <article>
                             <div>

@@ -280,7 +280,7 @@ class TicketingView2 extends React.Component {
                     <CenterDiv><NavLi>좌석선택</NavLi><br /></CenterDiv>
                     <NextPageDiv>
 
-                    <Link1 href="/TicketingView3">
+                    <Link1 href="/Ticketing3">
                         <NextPage type="button" value="예매하기" onClick={this.ReservationButtonClick}/>
                     </Link1>
                 </NextPageDiv>

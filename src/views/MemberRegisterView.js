@@ -263,11 +263,11 @@ class MemberRegisterView extends Component {
                         <Link href="/">로고</Link>
                     </Logo>
                     <Box>
-                        <Lgnb><Link href="/LoginView"><LoginInput type="button" value="로그인" /></Link></Lgnb>
+                        <Lgnb><Link href="/Login"><LoginInput type="button" value="로그인" /></Link></Lgnb>
                         <NavUl>
-                            <NavLi><Link href="/FindMyIdView">아이디 찾기</Link></NavLi>
-                            <NavLi><Link href="/FindMyPasswdView">비밀번호 찾기</Link></NavLi>
-                            <NavLi><Link href="/MemberRegisterView">회원가입</Link></NavLi>
+                            <NavLi><Link href="/FindMyId">아이디 찾기</Link></NavLi>
+                            <NavLi><Link href="/FindMyPasswd">비밀번호 찾기</Link></NavLi>
+                            <NavLi><Link href="/MemberRegister">회원가입</Link></NavLi>
                         </NavUl>
                     </Box>
                 </header>
@@ -303,7 +303,7 @@ class MemberRegisterView extends Component {
                                 </MailDiv>
                                 <ButtonDiv>
                                     <RegisterInput1 type="submit" value="회원가입" onClick ={this.login} />
-                                    <Link href="/MemberRegisterView"><RegisterInput2 type="reset" value="취소" /></Link>
+                                    <Link href="/MemberRegister"><RegisterInput2 type="reset" value="취소" /></Link>
                                 </ButtonDiv>
                             </RegisterForm>
                         </article>
