@@ -103,7 +103,23 @@ class TicketingView3 extends Component {
                 <section>
                     <ReservedSection>
                         <section>
-                            <label>이름</label><label>{userData.username}</label>
+                            <img src={concert.imgUrl} width="100%" />
+                        </section>
+                        <section>
+                            <label>공연 이름</label>
+                            <label>{concert.name}</label>
+                        </section>
+                        <section>
+                            <label>공연 날짜</label>
+                            <label>{concert.date}</label>
+                        </section>
+                        <section>
+                            <label>공연 장소</label>
+                            <label>{concert.concertPlace}</label>
+                        </section>
+                        <section>
+                            <label>이름</label>
+                            <label>{userData.username}</label>
                         </section>
                         <section>
                             <label>생년월일</label>
@@ -123,7 +139,7 @@ class TicketingView3 extends Component {
                         </section>
                         <section>
                             <label>예약 정보</label>
-                            {this.state.ReservationInfo.map(R => { console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col} &nbsp;</ReservationSeat> })}
+                            {this.state.ReservationInfo.map(R => { console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col}번 &nbsp;</ReservationSeat> })}
                         </section>
                         <section>
                             <label>결제 방법</label>
