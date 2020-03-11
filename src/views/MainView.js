@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import TicketingView1 from './TicketingView1';
+import * as axios from 'axios';
 import {
     BrowserRouter as Router,
     Route,
@@ -8,7 +8,7 @@ import {
     Redirect,
     withRouter
   } from 'react-router-dom';
-import axios from 'axios';
+
 // The start of initialize Style
 const Container = styled.div`
     width : 80%;
@@ -113,6 +113,7 @@ const fakeAuth = {
     signout(cb) {
       this.isAuthenticated = false
       sessionStorage.removeItem('userid');
+      sessionStorage.removeItem('plainUserId');
       setTimeout(cb, 100)
       window.location.replace('/');
     }
@@ -159,6 +160,7 @@ class MainView extends React.Component {
             const {status, data} = await request;
             alert("로그인 성공");
             sessionStorage.setItem('userid', JSON.stringify(data));
+            sessionStorage.setItem('plainUserId',JSON.stringify(this.state.userid));
             this.login2();
             window.location.replace('/');
           }catch(err){
