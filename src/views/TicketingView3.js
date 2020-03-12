@@ -50,7 +50,7 @@ class TicketingView3 extends Component {
             concert: [],
             userId: JSON.parse(sessionStorage.getItem('plainUserId')),
             userData: [],
-            payType: '신용카드',
+            payType: 'creditCard',
         }
     }
 
