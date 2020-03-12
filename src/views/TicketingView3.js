@@ -50,6 +50,7 @@ class TicketingView3 extends Component {
             concert: [],
             userId: JSON.parse(sessionStorage.getItem('plainUserId')),
             userData: [],
+            payType: '신용카드',
         }
     }
 
@@ -81,7 +82,25 @@ class TicketingView3 extends Component {
         });
     }
 
-    okBtnEventHandler = (event) => {
+    okBtnEventHandler = async (event) => {
+        const { match } = this.props;
+        for (var i = 0; i < this.state.ReservationInfo.length; i++) {
+            const request = axios({
+                url: 'http://localhost:5000/registerReservation',
+                method: 'post',
+                data: {
+                    reservationId: this.state.userId + match.params.ShowId.toString() + new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString() + new Date().getDate().toString() + new Date().getHours().toString() + new Date().getMinutes().toString() + new Date().getSeconds().toString() + i.toString(),
+                    reservationDate: new Date().getFullYear().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString() + " " + new Date().getHours().toString() + ":" + new Date().getMinutes().toString() + ":" + new Date().getSeconds().toString(),
+                    reservationPersonCnt: this.state.ReservationInfo.length,
+                    reservationSeatRow: this.state.ReservationInfo[i].row,
+                    reservationSeatCol: this.state.ReservationInfo[i].col,
+                    userId: this.state.userId,
+                    concertId: match.params.ShowId,
+                    payType: this.state.payType,
+                },
+            });
+            const { status, data } = await request;
+        }
         sessionStorage.removeItem('reservationInfo');
         alert('예매가 완료되었습니다.');
         window.location.replace('/');
@@ -91,6 +110,12 @@ class TicketingView3 extends Component {
         sessionStorage.removeItem('reservationInfo');
         alert('예매가 취소되었습니다.');
         window.location.replace('/');
+    }
+
+    payTypeSelectEventHandler = (event) => {
+        this.setState({
+            payType: event.target.value,
+        })
     }
 
     render() {
@@ -143,7 +168,7 @@ class TicketingView3 extends Component {
                         </section>
                         <section>
                             <label>결제 방법</label>
-                            <select name="payType">
+                            <select name="payType" onChange={this.payTypeSelectEventHandler}>
                                 <option value="creditCard">신용카드</option>
                                 <option value="accountTransfer">계좌이체</option>
                                 <option value="kakaoPay">카카오페이</option>
