@@ -85,7 +85,7 @@ const RL = styled.p`
     position:relative;
     display:inline-block;
     margin:5px;
-    bottom:15px;
+    bottom:10px;
     vertical-align:center;
     width: 30px;
     height: 30px;
@@ -131,10 +131,10 @@ class TicketingView2 extends React.Component {
                 //position:'static',
                 display: 'inline-block',
                 padding: '5px',
-                margin: '5px',
+                margin: '3px',
                 cursor: 'pointer',
-                width: '20px',
-                height: '20px'
+                width: '15px',
+                height: '15px'
             },
             Seat: this.state.map1[row][col].Seat,
             SeatClick: !SeatClick,
@@ -197,10 +197,10 @@ class TicketingView2 extends React.Component {
                             // position:'static',
                             display: 'inline-block',
                             padding: '5px',
-                            margin: '5px',
+                            margin: '3px',
                             cursor: 'pointer',
-                            width: '20px',
-                            height: '20px'
+                            width: '15px',
+                            height: '15px'
                         },
                         Seat: true,  //에약가능한지 확인
                         SeatClick: false
@@ -221,14 +221,14 @@ class TicketingView2 extends React.Component {
             this.state.map1[row][col].Seat = false;
             this.state.map1[row][col].backG = {
                 background: "url('https://jihunsg.github.io/PROJECT/png/곱하기.png')",
-                backgroundSize: '30px',
+                backgroundSize: '25px',
                 //position:'static',
                 display: 'inline-block',
                 padding: '5px',
-                margin: '5px',
+                margin: '3px',
                 cursor: 'pointer',
-                width: '20px',
-                height: '20px'
+                width: '15px',
+                height: '15px'
             }
         }
 
