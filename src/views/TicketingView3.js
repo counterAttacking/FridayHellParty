@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import * as axios from 'axios';
+import * as moment from 'moment';
 
 const Container = styled.div`
     width : 80%;
@@ -89,8 +90,8 @@ class TicketingView3 extends Component {
                 url: 'http://localhost:5000/registerReservation',
                 method: 'post',
                 data: {
-                    reservationId: this.state.userId + match.params.ShowId.toString() + new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString() + new Date().getDate().toString() + new Date().getHours().toString() + new Date().getMinutes().toString() + new Date().getSeconds().toString() + i.toString(),
-                    reservationDate: new Date().getFullYear().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString() + " " + new Date().getHours().toString() + ":" + new Date().getMinutes().toString() + ":" + new Date().getSeconds().toString(),
+                    reservationId: this.state.userId + match.params.ShowId.toString() + moment().format('YYYYMMDDhhmmss').toString() + i.toString(),
+                    reservationDate: moment().format('YYYY-MM-DD hh:mm:ss'),
                     reservationPersonCnt: this.state.ReservationInfo.length,
                     reservationSeatRow: this.state.ReservationInfo[i].row,
                     reservationSeatCol: this.state.ReservationInfo[i].col,
