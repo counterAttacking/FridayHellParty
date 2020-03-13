@@ -41,7 +41,6 @@ const Link1 = styled.a`
 const Logo = styled.span`
     float : left;
     display : inline-block;
-    font-size : 200%;
 `;
 
 const Box = styled.div`
@@ -240,7 +239,9 @@ export default function AuthExample() {
     <Container>
       <header>
         <Logo>
-          <Link1 href="/">로고</Link1>
+          <Link1 href="/">
+            <img src={"http://www.nextopedu.co.kr/default/img/_images/logo.png"} />
+          </Link1>
         </Logo>
         <Box>
           <Lgnb>

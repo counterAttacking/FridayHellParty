@@ -71,7 +71,9 @@ class LoginView extends React.Component {
             <Container>
                 <header>
                     <Logo>
-                        <Link href="/">LOGO</Link>
+                        <Link href="/">
+                            <img src={"http://www.nextopedu.co.kr/default/img/_images/logo.png"} />
+                        </Link>
                     </Logo>
                 </header>
                 <section>

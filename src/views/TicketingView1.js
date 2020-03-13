@@ -13,7 +13,6 @@ const Container = styled.div`
 const Logo = styled.div`
     position:relative;
     margin-bottom:10px;
-    background: #22b8cf;
     width:50%;
     height:50px;
     text-align:center;
@@ -88,10 +87,10 @@ class TicketingView1 extends React.Component {
         super(props);
         this.state = {
             concert: [],
-            Count:0,
-            Count2 : [{count: 1, Back:'lightgray'},
-            {count: 2, Back:'lightgray'},{count: 3, Back:'lightgray'},{count:4, Back:'lightgray'},{count: 5, Back:'lightgray'}],
-            Back:"",
+            Count: 0,
+            Count2: [{ count: 1, Back: 'lightgray' },
+            { count: 2, Back: 'lightgray' }, { count: 3, Back: 'lightgray' }, { count: 4, Back: 'lightgray' }, { count: 5, Back: 'lightgray' }],
+            Back: "",
         }
     }
 
@@ -106,24 +105,24 @@ class TicketingView1 extends React.Component {
             concert: data,
         });
     }
-    ClickCount =(C) =>{
+    ClickCount = (C) => {
         this.setState({
             Count: C,
         });
-        this.state.Count2[C-1].T = !this.state.Count2[C-1].T;
-        for(let i =0;i<5;i++){
+        this.state.Count2[C - 1].T = !this.state.Count2[C - 1].T;
+        for (let i = 0; i < 5; i++) {
             this.state.Count2[i].Back = 'lightgray';
-            if(i == C-1)
+            if (i == C - 1)
                 this.state.Count2[i].Back = 'gray';
         }
     }
-    SendCount = (ShowId) =>{
-        if(this.state.Count <= 0){
+    SendCount = (ShowId) => {
+        if (this.state.Count <= 0) {
             alert("인원을 선택해 주세요.");
         }
-        else{
+        else {
             sessionStorage.setItem('Count', JSON.stringify(this.state.Count));
-            window.location.replace('/Ticketing2/'+ShowId);
+            window.location.replace('/Ticketing2/' + ShowId);
         }
     }
     render() {
@@ -133,7 +132,11 @@ class TicketingView1 extends React.Component {
         return (
             <Container>
                 <header>
-                    <InforA href="/"><Logo>LOGO</Logo></InforA>
+                    <InforA href="/">
+                        <Logo>
+                            <img src={"http://www.nextopedu.co.kr/default/img/_images/logo.png"} />
+                        </Logo>
+                    </InforA>
                     <InforD>
                         <InforA href="/Login">내정보 </InforA>&nbsp;<InforA href="/MemberRegister">예약확인</InforA>
                     </InforD>
@@ -162,13 +165,13 @@ class TicketingView1 extends React.Component {
                             <Con2_P>관람 등급</Con2_P> {concert.rank}
                         </InfoCon2>
                     </div>
-                    <div>인원 &nbsp;{this.state.Count2.map(C => {return <RL style={{background: C.Back}} onClick={()=>{this.ClickCount(C.count)}} >{C.count}</RL>})}</div>
-                    <Button onClick={()=>{this.SendCount(ShowId)}}>
+                    <div>인원 &nbsp;{this.state.Count2.map(C => { return <RL style={{ background: C.Back }} onClick={() => { this.ClickCount(C.count) }} >{C.count}</RL> })}</div>
+                    <Button onClick={() => { this.SendCount(ShowId) }}>
                         <Button2 >예매하기</Button2>
                     </Button>
                 </fieldset>
                 {this.props.List}
-                
+
             </Container>
         );
     }

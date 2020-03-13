@@ -92,7 +92,9 @@ class FindMyIdView extends Component {
             <Container>
                 <header>
                     <Logo>
-                        <Link href="/">로고</Link>
+                        <Link href="/">
+                            <img src={"http://www.nextopedu.co.kr/default/img/_images/logo.png"} />
+                        </Link>
                     </Logo>
                 </header>
                 <section>

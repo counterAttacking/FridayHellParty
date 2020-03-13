@@ -35,7 +35,6 @@ const Minput2 = styled.input`
 `;
 const Logo = styled.div`
     position:relative;
-    background: #F0F0F0;
     width:50%;
     height:50px;
     left:25%;
@@ -93,7 +92,11 @@ class FindMyPasswdView extends React.Component {
     render() {
         return (
             <Container>
-                <InforA href="/"><Logo>LOGO</Logo></InforA>
+                <InforA href="/">
+                    <Logo>
+                        <img src={"http://www.nextopedu.co.kr/default/img/_images/logo.png"} />
+                    </Logo>
+                </InforA>
                 <div align="center">
 
                     <IDiv>
