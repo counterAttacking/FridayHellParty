@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 import queryParser from './queryParser';
+import Ticketing2 from './TicketingView2';
 import * as axios from 'axios';
 
 const Container = styled.div`
@@ -69,13 +70,28 @@ const Button2 = styled.div`
   
 `;
 /*예매하기 버튼*/
-
+const RL = styled.p` 
+    position:relative;
+    display:inline-block;
+    margin:1px;
+    left:10%;
+    vertical-align:center;
+    text-align:center;
+    width: 30px;
+    height: 30px;
+    cursor:pointer;
+   
+`;
 
 class TicketingView1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             concert: [],
+            Count:0,
+            Count2 : [{count: 1, Back:'lightgray'},
+            {count: 2, Back:'lightgray'},{count: 3, Back:'lightgray'},{count:4, Back:'lightgray'},{count: 5, Back:'lightgray'}],
+            Back:"",
         }
     }
 
@@ -90,7 +106,26 @@ class TicketingView1 extends React.Component {
             concert: data,
         });
     }
-
+    ClickCount =(C) =>{
+        this.setState({
+            Count: C,
+        });
+        this.state.Count2[C-1].T = !this.state.Count2[C-1].T;
+        for(let i =0;i<5;i++){
+            this.state.Count2[i].Back = 'lightgray';
+            if(i == C-1)
+                this.state.Count2[i].Back = 'gray';
+        }
+    }
+    SendCount = (ShowId) =>{
+        if(this.state.Count <= 0){
+            alert("인원을 선택해 주세요.");
+        }
+        else{
+            sessionStorage.setItem('Count', JSON.stringify(this.state.Count));
+            window.location.replace('/Ticketing2/'+ShowId);
+        }
+    }
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
@@ -127,11 +162,13 @@ class TicketingView1 extends React.Component {
                             <Con2_P>관람 등급</Con2_P> {concert.rank}
                         </InfoCon2>
                     </div>
-                    <Button href={"/Ticketing2/" + ShowId}>
-                        <Button2>예매하기</Button2>
+                    <div>인원 &nbsp;{this.state.Count2.map(C => {return <RL style={{background: C.Back}} onClick={()=>{this.ClickCount(C.count)}} >{C.count}</RL>})}</div>
+                    <Button onClick={()=>{this.SendCount(ShowId)}}>
+                        <Button2 >예매하기</Button2>
                     </Button>
                 </fieldset>
                 {this.props.List}
+                
             </Container>
         );
     }

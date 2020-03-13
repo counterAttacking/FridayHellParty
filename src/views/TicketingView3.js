@@ -102,6 +102,7 @@ class TicketingView3 extends Component {
             const { status, data } = await request;
         }
         sessionStorage.removeItem('reservationInfo');
+        sessionStorage.removeItem('Count');
         alert('예매가 완료되었습니다.');
         window.location.replace('/');
     }
