@@ -252,6 +252,11 @@ export default function AuthExample() {
             </Router>
           </Lgnb>
         </Box>
+        <div>
+          <Link1 href="/myReserve">
+            <h4>예매확인</h4>
+          </Link1>
+        </div>
       </header>
       <section>
         <section>

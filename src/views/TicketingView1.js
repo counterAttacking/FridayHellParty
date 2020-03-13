@@ -138,7 +138,7 @@ class TicketingView1 extends React.Component {
                         </Logo>
                     </InforA>
                     <InforD>
-                        <InforA href="/Login">내정보 </InforA>&nbsp;<InforA href="/MemberRegister">예약확인</InforA>
+                        <InforA href="/Login">내정보 </InforA>&nbsp;<InforA href="/myReserve">예약확인</InforA>
                     </InforD>
                 </header>
                 <fieldset>

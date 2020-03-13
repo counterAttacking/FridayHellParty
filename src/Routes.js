@@ -6,8 +6,7 @@ import TicketingView2 from './views/TicketingView2';
 import TicketingView3 from './views/TicketingView3';
 import FindMyIdView from './views/FindMyIdView';
 import FindMyPasswdView from './views/FindMyPasswdView';
-
-// import TicketReservation from './views/TicketReservation';
+import MyReserveView from './views/MyReserveView';
 
 const routes = [
     {
@@ -58,12 +57,12 @@ const routes = [
         exact: true,
         component: TicketingView3,
     },
-    /*{
-        id: 'ticketReservation',
-        path: '/ticketinfo',
+    {
+        id: 'myReserve',
+        path: '/myReserve',
         exact: true,
-        component: TicketReservation,
-    },*/
+        component: MyReserveView,
+    },
 ];
 
 export default routes;
