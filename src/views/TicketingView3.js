@@ -101,6 +101,14 @@ class TicketingView3 extends Component {
                 },
             });
             const { status, data } = await request;
+
+            axios({
+                url: 'http://localhost:5000/defineSeat/'+match.params.ShowId+'/'+this.state.ReservationInfo[i].row+'/'+this.state.ReservationInfo[i].col,
+                method: 'put',
+                data: {
+                   TF:0
+                },
+            });
         }
         sessionStorage.removeItem('reservationInfo');
         sessionStorage.removeItem('Count');
