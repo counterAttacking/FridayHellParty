@@ -97,16 +97,18 @@ class TicketingView3 extends Component {
                     reservationSeatCol: this.state.ReservationInfo[i].col,
                     userId: this.state.userId,
                     concertId: match.params.ShowId,
+                    concertName: this.state.concert.name,
+                    concertDate: this.state.concert.date,
                     payType: this.state.payType,
                 },
             });
             const { status, data } = await request;
 
             axios({
-                url: 'http://localhost:5000/defineSeat/'+match.params.ShowId+'/'+this.state.ReservationInfo[i].row+'/'+this.state.ReservationInfo[i].col,
+                url: 'http://localhost:5000/defineSeat/' + match.params.ShowId + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
                 method: 'put',
                 data: {
-                   TF:0
+                    TF: 0
                 },
             });
         }
