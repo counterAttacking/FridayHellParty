@@ -215,7 +215,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const AuthButton = withRouter(({ history }) => (
   fakeAuth.isAuthenticated ? (
     <p>
-      님 <button onClick={() => {
+      {sessionStorage.getItem('plainUserId')} 님 <button onClick={() => {
         fakeAuth.signout(() => history.push('/'))
       }}>로그아웃</button>
     </p>
