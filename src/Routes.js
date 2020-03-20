@@ -66,7 +66,7 @@ const routes = [
     },
     {
         id: 'myReserveDetail',
-        path: '/myReserveDetail',
+        path: '/myReserveDetail/:ReserveId',
         exact: true,
         component: MyReserveDetailView,
     },
