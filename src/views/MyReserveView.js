@@ -47,7 +47,8 @@ class MyReserveView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+            userId: JSON.parse(sessionStorage.getItem('plainUserId')),
+            reserveData: [],
         }
     }
 
@@ -68,12 +69,12 @@ class MyReserveView extends React.Component {
 
     render() {
         const { reserveData } = this.state;
+
         return (
             <Container>
-               
                 <div align='center'>
                     <Table>
-                        <Thead>    
+                        <Thead>
                             <TheadTh>예약번호</TheadTh>
                             <TheadTh>공연명</TheadTh>
                             <TheadTh>공연날짜</TheadTh>
