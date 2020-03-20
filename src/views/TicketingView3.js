@@ -98,10 +98,13 @@ class TicketingView3 extends Component {
                     userId: this.state.userId,
                     concertId: match.params.ShowId,
                     concertName: this.state.concert.name,
+                    concertPlace: this.state.concert.concertPlace,
                     concertDate: this.state.concert.date,
                     payType: this.state.payType,
+                    price: this.state.concert.price,
                 },
             });
+            console.log(moment());
             const { status, data } = await request;
 
             axios({
