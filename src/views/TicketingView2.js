@@ -110,7 +110,7 @@ class TicketingView2 extends React.Component {
             count: 0,
             Reser: [],
             concertN: [],
-            map:[],
+            map: [],
             totPrice: 0,
         }
     }
@@ -121,83 +121,82 @@ class TicketingView2 extends React.Component {
             url: 'http://localhost:5000/getConcert/' + match.params.ShowId,
             method: 'get',
         });
-        console.log(match.params);
         const { status, data } = await request;
         this.setState({
             concert: data,
         });
-        console.log(this.state.concert);
     }
 
-    
+
 
     ReservationButtonClick = (ShowId) => {
-        if(this.state.count<sessionStorage.getItem('Count')){
+        if (this.state.count < sessionStorage.getItem('Count')) {
             alert("좌석수가 부족합니다.");
         }
-        else{
-            this.state.map.map((map2)=> {map2.map((m)=>{
-                if(m.TF === 2){
-                    console.log(m.Row);
+        else {
+            this.state.map.map((map2) => {
+                map2.map((m) => {
+                    if (m.TF === 2) {
+                        console.log(m.Row);
                         this.state.Reser.push({
                             row: m.Row,
                             col: m.Col,
                         });
-                }
-            })})
+                    }
+                })
+            })
             sessionStorage.setItem('reservationInfo', JSON.stringify(this.state.Reser));
-            console.log(this.state.Reser);
-             window.location.replace("/Ticketing3/"+ShowId);
+            window.location.replace("/Ticketing3/" + ShowId);
         }
     }
-    
-    info=async(ShowId)=>{
+
+    info = async (ShowId) => {
         const { match } = this.props;
-          const request = axios({
-              url: 'http://localhost:5000/defineSeat/'+ShowId,
-              method: 'get',
-          });
-          const { status, data } = await request;
-          var map2= [];
-          for(let i = 0;i<10;i++){
-            map2.push(data.filter((Row)=> Row.Row === String.fromCharCode(65+i)));
-          }
-          this.setState({
-            map: map2,
-          });
-          
-      }
-      Seat = (row, col, Seat) => {
-        if(this.state.count < sessionStorage.getItem('Count') || Seat===2){
-          const R = row.charCodeAt(row)-65;
-          if (Seat) { //예약 가능한 자리인지 확인
-            
-                if(this.state.map[R][col-1].TF === 2){
-                        this.state.map[R][col-1].TF = 1;
-                        this.setState({
-                            count: this.state.count-1
-                        });
-                    }
-                    else {
-                        this.state.map[R][col-1].TF = 2;
-                        this.setState({
-                            count: this.state.count+1
-                        });
-                    }
-                }
-                
-                else    {
-                    alert("이미 예약된 좌석입니다.");
-                }
-            }
-            else{
-                alert("인원초과");
-            }
-            
+        const request = axios({
+            url: 'http://localhost:5000/defineSeat/' + ShowId,
+            method: 'get',
+        });
+        const { status, data } = await request;
+        var map2 = [];
+        for (let i = 0; i < 10; i++) {
+            map2.push(data.filter((Row) => Row.Row === String.fromCharCode(65 + i)));
         }
-        
-        
-      
+        this.setState({
+            map: map2,
+        });
+
+    }
+    Seat = (row, col, Seat) => {
+        if (this.state.count < sessionStorage.getItem('Count') || Seat === 2) {
+            const R = row.charCodeAt(row) - 65;
+            if (Seat) { //예약 가능한 자리인지 확인
+
+                if (this.state.map[R][col - 1].TF === 2) {
+                    this.state.map[R][col - 1].TF = 1;
+                    this.setState({
+                        count: this.state.count - 1
+                    });
+                }
+                else {
+                    this.state.map[R][col - 1].TF = 2;
+                    this.setState({
+                        count: this.state.count + 1
+                    });
+                }
+            }
+
+            else {
+                alert("이미 예약된 좌석입니다.");
+            }
+        }
+        else {
+            alert("인원초과");
+        }
+
+    }
+
+
+
     render() {
         const { match } = this.props;
         const { ShowId } = match.params;
@@ -205,10 +204,10 @@ class TicketingView2 extends React.Component {
 
         if (this.state.first) {
             this.setState({
-                first:false,
-              });
-              this.info(ShowId);
-            
+                first: false,
+            });
+            this.info(ShowId);
+
         }
 
         return (
@@ -232,24 +231,29 @@ class TicketingView2 extends React.Component {
                     </InfoCon2>
                     <InfoCon2>
                         <Con2_P>예약 가능 인원 :  {sessionStorage.getItem('Count')}명</Con2_P>
-                        
+
                     </InfoCon2>
                     <InfoCon2>
-                        
-                        <Con2_P>선택한 좌석 수: {this.state.count}</Con2_P> 
+
+                        <Con2_P>선택한 좌석 수: {this.state.count}</Con2_P>
                     </InfoCon2>
                     <DDD>
-                    {this.state.map.map((map2)=> {return <section style={{position:'relative', top:'15px'}}><RLA>{map2[0].Row}</RLA>
-                            {map2.map((m)=> {return <RL style={{
-                        background: (m.TF >= 2 ? '#00ff00' : (m.TF ? '#b34040' : 'url("https://jihunsg.github.io/PROJECT/png/X자2.png")'))}} onClick={() => {this.Seat(m.Row, m.Col, m.TF)}}/>}
-                        )}
-                    </section>})}
-                        
-        
+                        {this.state.map.map((map2) => {
+                            return <section style={{ position: 'relative', top: '15px' }}><RLA>{map2[0].Row}</RLA>
+                                {map2.map((m) => {
+                                    return <RL style={{
+                                        background: (m.TF >= 2 ? '#00ff00' : (m.TF ? '#b34040' : 'url("https://jihunsg.github.io/PROJECT/png/X자2.png")'))
+                                    }} onClick={() => { this.Seat(m.Row, m.Col, m.TF) }} />
+                                }
+                                )}
+                            </section>
+                        })}
+
+
                     </DDD>
 
                     <NextPageDiv>
-                        <Link1 onClick={()=>{this.ReservationButtonClick(ShowId)}}>
+                        <Link1 onClick={() => { this.ReservationButtonClick(ShowId) }}>
                             <NextPage type="button" value="예매하기" />
                         </Link1>
                     </NextPageDiv>

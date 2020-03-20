@@ -176,7 +176,7 @@ class TicketingView3 extends Component {
                         </section>
                         <section>
                             <label>예약 정보</label>
-                            {this.state.ReservationInfo.map(R => { console.log(R.row, R.col); return <ReservationSeat>{R.row}열 {R.col}번 &nbsp;</ReservationSeat> })}
+                            {this.state.ReservationInfo.map(R => { return <ReservationSeat>{R.row}열 {R.col}번 &nbsp;</ReservationSeat> })}
                         </section>
                         <section>
                             <label>결제 방법</label>
