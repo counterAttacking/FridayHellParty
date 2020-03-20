@@ -33,7 +33,7 @@ background: #e7708d;
 margin: 20px 10px;
 
 `;
-const Td = styled.td`
+const TD = styled.td`
 width: 350px;
 padding: 10px;
 vertical-align: top;
@@ -48,7 +48,15 @@ class MyReserveView extends React.Component {
         super(props);
         this.state = {
             userId: JSON.parse(sessionStorage.getItem('plainUserId')),
-            reserveData: [],
+
+            reserveData: [{
+
+                reservationId:[],
+                concertName:[],
+                concertDate:[],
+                reservationPersonCnt:[],
+
+            }]
         }
     }
 
@@ -62,13 +70,39 @@ class MyReserveView extends React.Component {
             method: 'get',
         });
         const { status, data } = await request;
+        console.log(data);
         this.setState({
             reserveData: data,
         });
     }
 
     render() {
-        const { reserveData } = this.state;
+       
+        console.log(this.state.userId)
+        const {reserveData} = this.state;
+        const dataList = reserveData.map(
+            (data,index)=>(
+               <tr>
+                   <TD>
+                   {data.reservationId}
+                </TD>
+                <TD>
+                   {data.concertName}    
+                </TD>
+                <TD>
+                   {data.concertDate}    
+                </TD>
+                <TD>
+                   {data.reservationPersonCnt}    
+                </TD>
+                <TD>
+                
+                <a href="http://localhost:3000/myReserveDetail/:ReserveId">상세보기</a>
+
+                </TD>
+                </tr>
+            )
+        );
 
         return (
             <Container>
@@ -79,13 +113,16 @@ class MyReserveView extends React.Component {
                             <TheadTh>공연명</TheadTh>
                             <TheadTh>공연날짜</TheadTh>
                             <TheadTh>예매수</TheadTh>
+                            <TheadTh>상세정보</TheadTh>
                         </Thead>
                         <tbody>
-                            
+                            {dataList}
                         </tbody>
                     </Table>
                 </div>
+
             </Container>
+            
         );
     }
 }
