@@ -120,6 +120,7 @@ class TicketingView3 extends Component {
 
     cancelBtnEventHandler = (event) => {
         sessionStorage.removeItem('reservationInfo');
+        sessionStorage.removeItem('Count');
         alert('예매가 취소되었습니다.');
         window.location.replace('/');
     }
