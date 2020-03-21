@@ -108,7 +108,15 @@ class TicketingView3 extends Component {
             });
             const { status, data } = await request;
             const reservationid = data;
-            
+            axios({
+                url: 'http://localhost:5000/updateSeat/' + match.params.ShowId,// + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
+                method: 'put',
+                data: {
+                    length:this.state.ReservationInfo.length,
+                    seat:this.state.ReservationInfo,
+                    TF:0,
+                },
+            });
             axios({
                 url: 'http://localhost:5000/reservationpost',
                 method: 'post',
@@ -121,15 +129,7 @@ class TicketingView3 extends Component {
                     concertplaceid:match.params.ShowId,
                 },
             });
-            axios({
-                url: 'http://localhost:5000/updateSeat/' + match.params.ShowId,// + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
-                method: 'put',
-                data: {
-                    length:this.state.ReservationInfo.length,
-                    seat:this.state.ReservationInfo,
-                    TF:0,
-                },
-            });
+            
             this.setState({
                 reservation_Complete:true,
             });
