@@ -52,6 +52,7 @@ class TicketingView3 extends Component {
             userId: JSON.parse(sessionStorage.getItem('plainUserId')),
             userData: [],
             payType: 'creditCard',
+            reservation_Complete:false,
         }
     }
 
@@ -82,45 +83,63 @@ class TicketingView3 extends Component {
             userData: data,
         });
     }
-
-    okBtnEventHandler = async (event) => {
-        const { match } = this.props;
-        for (var i = 0; i < this.state.ReservationInfo.length; i++) {
-            const request = axios({
-                url: 'http://localhost:5000/registerReservation',
+    insert_reservationInfo =async()=> {
+        
+        }
+    
+    okBtnEventHandler = async(event) => {
+        if(confirm("예매를 하시겠습니까?")){
+            const { match } = this.props;
+        const request = axios({
+            url: 'http://localhost:5000/registerReservation',
+            method: 'post',
+            data: {
+                reservationId: this.state.userId + match.params.ShowId.toString() + moment().format('YYYYMMDDhhmmss').toString(),
+                reservationDate: moment().format('YYYY-MM-DD hh:mm:ss'),
+                reservationPersonCnt: this.state.ReservationInfo.length,
+                price:parseInt(this.state.concert.price) * this.state.ReservationInfo.length,
+                userId: this.state.userId,
+                concertId: match.params.ShowId,
+                concertPlace:this.state.concert.concertPlace,
+                concertName: this.state.concert.name,
+                concertDate: this.state.concert.date,
+                payType: this.state.payType,
+                },
+            });
+            const { status, data } = await request;
+            const reservationid = data;
+            
+            axios({
+                url: 'http://localhost:5000/reservationpost',
                 method: 'post',
                 data: {
-                    reservationId: this.state.userId + match.params.ShowId.toString() + moment().format('YYYYMMDDhhmmss').toString() + i.toString(),
-                    reservationDate: moment().format('YYYY-MM-DD hh:mm:ss'),
-                    reservationPersonCnt: this.state.ReservationInfo.length,
-                    reservationSeatRow: this.state.ReservationInfo[i].row,
-                    reservationSeatCol: this.state.ReservationInfo[i].col,
-                    userId: this.state.userId,
-                    concertId: match.params.ShowId,
-                    concertName: this.state.concert.name,
-                    concertPlace: this.state.concert.concertPlace,
-                    concertDate: this.state.concert.date,
-                    payType: this.state.payType,
-                    price: this.state.concert.price,
+                    length:this.state.ReservationInfo.length,
+                    seat:this.state.ReservationInfo,
+                    reservationId:reservationid,
+                    userid: this.state.userId,
+                    concertid: match.params.ShowId,
+                    concertplaceid:match.params.ShowId,
                 },
             });
-            console.log(moment());
-            const { status, data } = await request;
-
             axios({
-                url: 'http://localhost:5000/defineSeat/' + match.params.ShowId + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
+                url: 'http://localhost:5000/updateSeat/' + match.params.ShowId,// + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
                 method: 'put',
                 data: {
-                    TF: 0
+                    length:this.state.ReservationInfo.length,
+                    seat:this.state.ReservationInfo,
+                    TF:0,
                 },
             });
+            this.setState({
+                reservation_Complete:true,
+            });
+            sessionStorage.removeItem('reservationInfo');
+            sessionStorage.removeItem('Count');
+            // this.insert_reservationInfo();
+            alert('예매가 완료되었습니다.');
+            
         }
-        sessionStorage.removeItem('reservationInfo');
-        sessionStorage.removeItem('Count');
-        alert('예매가 완료되었습니다.');
-        window.location.replace('/');
     }
-
     cancelBtnEventHandler = (event) => {
         sessionStorage.removeItem('reservationInfo');
         sessionStorage.removeItem('Count');
@@ -138,7 +157,9 @@ class TicketingView3 extends Component {
         const { match } = this.props;
         const { ShowId } = match.params;
         const { concert, userData } = this.state;
-
+        if(this.state.reservation_Complete){
+            window.location.replace('/');
+        }
         return (
             <Container>
                 <section>

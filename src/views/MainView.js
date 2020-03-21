@@ -215,7 +215,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const AuthButton = withRouter(({ history }) => (
   fakeAuth.isAuthenticated ? (
     <p>
-      {sessionStorage.getItem('plainUserId')} 님 <button onClick={() => {
+      {sessionStorage.getItem('plainUserId')} 님 <Link1 href="/myReserve">
+            <h4>예매확인</h4>
+          </Link1><button onClick={() => {
         fakeAuth.signout(() => history.push('/'))
       }}>로그아웃</button>
     </p>
@@ -223,16 +225,7 @@ const AuthButton = withRouter(({ history }) => (
       <MainView />
     )
 ))
-// var CC = [];
-// const getconcert = async()=>{
-//   const request = axios({
-//     url:'http://localhost:5000/getConcert',
-//     mathod:'get',
-//   });
-//   const {status, data} = await request;
-//   CC = data;
-//   return data;
-// }
+
 
 export default function AuthExample() {
   return (
@@ -253,9 +246,7 @@ export default function AuthExample() {
           </Lgnb>
         </Box>
         <div>
-          <Link1 href="/myReserve">
-            <h4>예매확인</h4>
-          </Link1>
+          
         </div>
       </header>
       <section>

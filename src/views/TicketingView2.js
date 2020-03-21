@@ -209,7 +209,6 @@ class TicketingView2 extends React.Component {
             this.info(ShowId);
 
         }
-
         return (
             <Container>
                 <div align='center'>

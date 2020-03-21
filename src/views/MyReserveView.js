@@ -40,8 +40,32 @@ vertical-align: top;
 border-bottom: 1px solid #ccc;
 
 `;
-
-
+const Tr = styled.tr`
+cursor:pointer;
+&: hover{
+    background:lightgray;
+}
+`;
+const Link1 = styled.a`
+    text-decoration : none;
+    color : black;
+    &:hover {
+        text-decoration : none;
+        color : black;
+    }
+    &:link {
+        text-decoration : none;
+        color : black;
+    }
+    &:visited {
+        text-decoration : none;
+        color : black;
+    }
+    &:active {
+        text-decoration : none;
+        color : black;
+    }
+`;
 
 class MyReserveView extends React.Component {
     constructor(props) {
@@ -82,7 +106,7 @@ class MyReserveView extends React.Component {
         const {reserveData} = this.state;
         const dataList = reserveData.map(
             (data,index)=>(
-               <tr>
+               <Tr>
                    <TD>
                    {data.reservationId}
                 </TD>
@@ -97,10 +121,10 @@ class MyReserveView extends React.Component {
                 </TD>
                 <TD>
                 
-                <a href="http://localhost:3000/myReserveDetail/:ReserveId">상세보기</a>
+                <Link1 href={"http://localhost:3000/myReserveDetail/" + data.reservationId}>상세보기</Link1>
 
                 </TD>
-                </tr>
+                </Tr>
             )
         );
 
