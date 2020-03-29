@@ -136,7 +136,7 @@ class MyReserveDetailView extends React.Component{
         if(confirm("예매를 취소하시겠습니까?")){
            this.reservation_Info_Delete();
            alert("예매가 취소 되었습니다.");
-           window.location.replace('/');
+           //window.location.replace('/');
         }
         
     }

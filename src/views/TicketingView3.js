@@ -52,7 +52,7 @@ class TicketingView3 extends Component {
             userId: JSON.parse(sessionStorage.getItem('plainUserId')),
             userData: [],
             payType: 'creditCard',
-            reservation_Complete:false,
+            
         }
     }
 
@@ -83,9 +83,7 @@ class TicketingView3 extends Component {
             userData: data,
         });
     }
-    insert_reservationInfo =async()=> {
-        
-        }
+   
     
     okBtnEventHandler = async(event) => {
         if(confirm("예매를 하시겠습니까?")){
@@ -108,15 +106,7 @@ class TicketingView3 extends Component {
             });
             const { status, data } = await request;
             const reservationid = data;
-            axios({
-                url: 'http://localhost:5000/updateSeat/' + match.params.ShowId,// + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
-                method: 'put',
-                data: {
-                    length:this.state.ReservationInfo.length,
-                    seat:this.state.ReservationInfo,
-                    TF:0,
-                },
-            });
+            
             axios({
                 url: 'http://localhost:5000/reservationpost',
                 method: 'post',
@@ -129,15 +119,20 @@ class TicketingView3 extends Component {
                     concertplaceid:match.params.ShowId,
                 },
             });
-            
-            this.setState({
-                reservation_Complete:true,
+            axios({
+                url: 'http://localhost:5000/updateSeat/' + match.params.ShowId,// + '/' + this.state.ReservationInfo[i].row + '/' + this.state.ReservationInfo[i].col,
+                method: 'put',
+                data: {
+                    length:this.state.ReservationInfo.length,
+                    seat:this.state.ReservationInfo,
+                    TF:0,
+                },
             });
+            
             sessionStorage.removeItem('reservationInfo');
             sessionStorage.removeItem('Count');
-            // this.insert_reservationInfo();
             alert('예매가 완료되었습니다.');
-            
+            //window.location.replace('/'); 
         }
     }
     cancelBtnEventHandler = (event) => {
@@ -157,9 +152,7 @@ class TicketingView3 extends Component {
         const { match } = this.props;
         const { ShowId } = match.params;
         const { concert, userData } = this.state;
-        if(this.state.reservation_Complete){
-            window.location.replace('/');
-        }
+       
         return (
             <Container>
                 <section>
